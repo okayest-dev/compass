@@ -10,11 +10,11 @@ The user has come to you with an idea. It is unrefined and vague. There are stil
 ## Consumes / produces / hands off
 
 - **Consumes:** a loose, oversized idea, a whole feature area, a migration, a strategic choice, too uncharted to spec directly.
-- **Produces:** a map (destination, log, uncharted water, out-of-scope) and a set of resolved waypoints, each resolved via `compass-navigate`, `compass-prototype`, or direct investigation.
+- **Produces:** a map (destination, log, features, uncharted water, out-of-scope) and a set of resolved waypoints, each resolved via `compass-navigate`, `compass-prototype`, or direct investigation.
 - **Called from:** used directly whenever an idea is too large or too uncharted for `compass-navigate` alone.
-- **Hands off to:** `compass-spec`, once the map is clear enough that nothing is left to decide before someone writes the spec.
+- **Hands off to:** `compass-spec`, once per feature identified when the map clears (see [Splitting into features](#splitting-into-features)). One feature covering the whole map is a normal outcome, not a fallback; splitting only happens when the resolved map genuinely reads as more than one.
 
-The destination varies per effort, and naming it is the first act of charting: it shapes every waypoint. It might be a spec to hand off and iterate on, a decision to lock before planning starts, or a change made in place, like a data migration. The map is domain-agnostic: engineering work, content planning, whatever fits the shape.
+The destination varies per effort, and naming it is the first act of charting: it shapes every waypoint. It might be one or more specs to hand off and iterate on, a decision to lock before planning starts, or a change made in place, like a data migration. The map is domain-agnostic: engineering work, content planning, whatever fits the shape.
 
 ## Issue types
 
@@ -24,6 +24,7 @@ Decide the type before creating anything. Do not leave it untyped and deferred t
 - **Every waypoint is a Task or a Decision**, never left generic. The [waypoint type](#waypoint-types) fixes which:
   - `investigate` and `groundwork` waypoints are **Tasks** (work items such as reading, provisioning, or moving data). Use `beads -t task`, a Jira Task, or a plain issue labelled `task`.
   - `prototype` and `decide` waypoints are **Decisions**. Use `beads -t decision` where the tracker has that type natively. Where it does not, use a Task and say so explicitly in the body ("this task resolves a decision, not a build step") so it is not mistaken for implementation work later.
+- **The Epic's children include one or more Features**, one per group `compass-spec` writes up once the map clears. An Epic with a single Feature child is a normal, complete outcome; nothing about the Epic/Feature relationship requires more than one.
 
 ## Plan, don't do
 
@@ -59,6 +60,12 @@ The whole map at low resolution, loaded once per session. Open waypoints are **n
 <!-- the index: one line per closed waypoint, enough to judge relevance, then zoom the link for the detail the waypoint holds -->
 
 - [<closed waypoint title>](link): <one-line gist of the answer>
+
+## Features
+
+<!-- populated once the map clears, see "Splitting into features". Empty until then. Each entry groups the Log entries whose resolutions belong to one independently shippable spec. -->
+
+- **<feature name>**: <one-line gist of what it covers>. Waypoints: [<waypoint title>](link), [<waypoint title>](link)
 
 ## Not yet specified
 
@@ -117,6 +124,28 @@ Out-of-scope work never graduates (the horizon stops at the destination), so it 
 
 Ruling something out of scope is a scoping act, not a step on the route. When a waypoint that already exists turns out to sit past the destination (mis-scoped in while charting, or exposed by a resolution), **close it** (a closed waypoint is unambiguously off the horizon) and leave one line in the **Out of scope** section: the gist plus why it is out of scope, linking the closed waypoint. It stays out of the **Log**, which records the route actually walked; a scope boundary is not a step on it.
 
+## Splitting into features
+
+The map clears when both the horizon and **Not yet specified** are empty: nothing left unblocked, nothing left too fuzzy to waypoint. Before handing off to `compass-spec`, decide how many features the resolved map actually contains.
+
+**One epic can produce one feature.** If the resolved waypoints read as a single coherent effort, one `compass-spec` call covering the whole map is correct, and nothing further is needed. Splitting is for when it doesn't: a whole feature area or migration big enough to need a map is also often big enough to contain several independently shippable pieces, and cramming them into one spec produces a document nobody can review and a task list with no feature-level grouping underneath the Epic.
+
+### How to group
+
+Use what the map already has. Don't invent a new signal:
+
+- **Blocking edges.** Waypoints that block or are blocked by each other, and nothing outside that chain, are usually one feature. The dependency already says they can't be understood in isolation.
+- **Shared destination.** Waypoints whose resolutions all answer "how does capability X work" belong together, even without a direct blocking edge between them.
+- **Independent shippability.** If a resolution could be implemented and reviewed on its own, without reading the rest of the Log to make sense of it, it is a candidate for its own feature rather than being folded into a larger one.
+
+A feature is too small if its spec would just restate one waypoint's answer with no synthesis. It is too large if its Implementation Decisions section would need its own sub-headings to stay readable; that is a sign it is actually two features sharing a spec.
+
+### Record and hand off
+
+Fill in the map's **Features** section: one entry per group, naming it, gisting what it covers, and pointing at the waypoints (Log entries) it draws from. Every closed waypoint belongs to exactly one feature. If a resolution does not fit any existing group, it is the seed of a new one, not a fit forced into the nearest one.
+
+Call `compass-spec` once per feature, each producing its own Feature-type issue as a child of the Epic. Feature specs may reference each other (a later feature building on an earlier one's shape), but each should still stand alone: reviewable, and workable through `compass-task`, without needing the others in hand first.
+
 ## Invocation
 
 Two modes. Either way, **never resolve more than one waypoint per session**, with the exception of investigate waypoints.
@@ -141,5 +170,6 @@ Invoked with a map (a link or id). A waypoint is **optional**: without one, the 
 3. Resolve it. **Zoom as needed**: fetch the full body of any related or closed waypoint on demand; use whichever skills the `## Notes` block names. If in doubt, use `compass-navigate` and `compass-glossary`.
 4. Record the resolution: post the answer as a **resolution comment** (or write it into the waypoint file), **close** the waypoint, and **append a pointer** to the map's Log.
 5. Add newly-surfaced waypoints (create, then wire); graduate any uncharted water the answer has made specifiable, clearing each graduated patch from **Not yet specified** so it lives only as its new waypoint. If the answer reveals that a waypoint (this one or another) sits beyond the destination, **rule it out of scope** rather than resolving it on the route. If the decision invalidates other parts of the map, update or delete those waypoints.
+6. If this resolution clears the map (the horizon and **Not yet specified** are now both empty), stop and split it into features before handing off. See [Splitting into features](#splitting-into-features).
 
 Waypoints without a blocking relationship between them may be worked in parallel, so expect other sessions to be editing the map concurrently.

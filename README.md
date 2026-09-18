@@ -23,10 +23,12 @@ done
 ```
 compass-navigate (decide) ──▶ compass-spec
         or, for large or vague efforts:
-compass-map (waypoints, each resolved via compass-navigate/compass-prototype) ──▶ compass-spec
+compass-map (waypoints, each resolved via compass-navigate/compass-prototype) ──▶ compass-spec (once per feature the cleared map splits into)
 ```
 
 Neither path writes a formal artifact bridging navigate and spec directly. The direct path hands off through shared conversation history, since decide-then-spec is expected to happen in one sitting. The map path hands off through the map's Log instead, since a map is explicitly meant to span sessions a single conversation can't. Anything hard-to-reverse gets a durable trace either way, via `compass-glossary`.
+
+A cleared map is not automatically one spec. `compass-map` groups its resolved waypoints into one or more independently shippable features (using blocking edges and shared destinations already on the map, not a new signal) and calls `compass-spec` once per group. One feature covering the whole map is a normal outcome, not a fallback; splitting only happens when the resolved map genuinely reads as more than one.
 
 From a spec to done, every spec passes through the same gate regardless of which path produced it:
 
@@ -36,7 +38,7 @@ compass-spec ──▶ compass-navigate (sanity-check, register as Feature) ─�
 
 | Skill | Role |
 |---|---|
-| `compass-map` | Decomposes an oversized or vague effort into waypoints (an Epic and its children) before a spec can be written. Hands off straight to `compass-spec`; `compass-navigate` is used internally, per waypoint, not as a separate step in between. |
+| `compass-map` | Decomposes an oversized or vague effort into waypoints (an Epic and its children) before a spec can be written. Once cleared, splits into one or more features and hands each off to `compass-spec`. `compass-navigate` is used internally, per waypoint, not as a separate step in between. |
 | `compass-spec` | Synthesises a spec from the resolved decisions in the conversation, or a cleared map's Log, and publishes it as a Feature. |
 | `compass-navigate` | The decision interview: sharpens an idea before `compass-spec` writes it up (directly, or per waypoint inside `compass-map`), or sanity-checks and registers an existing spec (as a Feature) before `compass-task` breaks it down. Runs at both points, not just one, but only ever as its own top-level step before `compass-spec` on the direct path; the map path folds that role into the map itself. |
 | `compass-task` | Breaks a spec, a plan, or the current conversation into vertical-slice Tasks with explicit blocking edges. |
@@ -59,7 +61,7 @@ Cross-cutting skills, called from wherever they're needed rather than as fixed p
 Every skill that creates tracked work names its type explicitly, rather than leaving it generic:
 
 - **Epic**: `compass-map`'s map.
-- **Feature**: `compass-spec`'s output, or whatever `compass-navigate` registers when a spec arrives from outside the conversation.
+- **Feature**: `compass-spec`'s output, one per feature grouping when it runs off a cleared map, or whatever `compass-navigate` registers when a spec arrives from outside the conversation.
 - **Task**: `compass-task`'s output, and `investigate`/`groundwork` waypoints on a map.
 - **Decision**: a hard-to-reverse call recorded via `compass-glossary`, and `decide`/`prototype` waypoints on a map.
 
@@ -77,6 +79,8 @@ These map onto whatever the project's own tracker calls them (a Jira Story or Ta
 
 **Don't merge the two review axes.** `compass-review`'s Standards and Spec findings are reported side by side on purpose. A change can pass one and fail the other. Collapsing them into one ranked list hides that.
 
+**Group by what the map already shows, don't force a split.** `compass-map`'s blocking edges and shared destinations already say which waypoints belong together; use those instead of inventing a new signal. One feature covering a whole cleared map is a correct outcome, not an unfinished one. Splitting a small map into several thin features is as much a mistake as cramming a genuinely multi-feature epic into one sprawling spec.
+
 **There's no router skill.** Unlike Matt Pocock's `ask-matt`, nothing here decides which skill to use for you. Each `SKILL.md` states its own consumes, produces, and hands off at the top, so the whole pipeline is readable from any single file without a separate map of the system.
 
 **Keep cross-references in sync when renaming a skill.** Renaming one skill (`compass-decide` became `compass-navigate`) means grepping every other `SKILL.md` for the old name, not just the ones you remember touching it. A stale reference points at a skill that no longer exists, and nobody notices until someone reads that exact line.
@@ -90,5 +94,6 @@ Compass uses a consistent nautical vocabulary rather than reusing terms from the
 - **Waypoint**: a single open question on a `compass-map` map. Not the same as a Task.
 - **Horizon**: the set of open, unblocked, unclaimed items ready to pick up, whether waypoints on a map or tasks in the backlog.
 - **Log**: the running record of resolved waypoints on a map.
+- **Features**: the map's grouping of its own Log entries into one or more independently shippable specs, filled in once the map clears.
 - **Uncharted water**: work that's in scope but not yet sharp enough to turn into a waypoint.
 - **Seam**, **interface**, **depth**, **leverage**, **locality**: `compass-design`'s vocabulary for module shape. Used consistently across `compass-spec`, `compass-task`, and `compass-test` rather than substituted with "component" or "boundary."

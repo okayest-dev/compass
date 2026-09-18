@@ -9,14 +9,14 @@ Take the current conversation and codebase understanding and produce a spec. Do 
 
 ## Consumes / produces / hands off
 
-- **Consumes:** a conversation (and its resolved decisions), typically the output of `compass-navigate` or a cleared `compass-map`.
+- **Consumes:** a conversation (and its resolved decisions), typically the output of `compass-navigate` directly, or one feature grouping from a cleared `compass-map` (see that skill's "Splitting into features"). A single call covering the whole map is normal when the map turns out to be one feature.
 - **Produces:** a spec document, published as a **Feature**-type issue wherever this project tracks work.
-- **Called from:** directly, once enough decisions exist to describe the feature.
+- **Called from:** directly, once enough decisions exist to describe a feature; once per feature identified when a `compass-map` clears.
 - **Hands off to:** `compass-navigate`, to sanity-check the finished spec and confirm its Feature registration, before `compass-task` breaks it into implementation-ready tasks. For a spec just authored here, that pass is typically fast, since the decisions behind it were already interrogated on the way in, but it still runs. Every spec reaches `compass-task` through the same gate regardless of how it was produced.
 
 ## Issue type
 
-Publish the spec as a **Feature** (use the tracker's closest equivalent: a Jira Story, a GitHub or Linear issue labelled `feature`, a `beads` issue created with `-t feature`). If the codebase-level parent from `compass-map` exists, link the Feature as its child. Do not publish the spec as a generic, untyped issue. The type is what lets `compass-task` and `compass-review` find it later without guessing. (When a spec arrives without going through this skill at all, handed in from outside the conversation, `compass-navigate` performs this same registration; see its "Sanity-checking a provided spec" section.)
+Publish the spec as a **Feature** (use the tracker's closest equivalent: a Jira Story, a GitHub or Linear issue labelled `feature`, a `beads` issue created with `-t feature`). If this spec came from a `compass-map`, link the Feature as a child of the map's Epic. Do not publish the spec as a generic, untyped issue. The type is what lets `compass-task` and `compass-review` find it later without guessing. (When a spec arrives without going through this skill at all, handed in from outside the conversation, `compass-navigate` performs this same registration; see its "Sanity-checking a provided spec" section.)
 
 ## Process
 
