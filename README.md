@@ -52,6 +52,7 @@ Cross-cutting skills, called from wherever they're needed rather than as fixed p
 |---|---|
 | `compass-glossary` | The project's shared vocabulary and decision history. A persistent memory tool first, `CONTEXT.md`/`docs/adr/` only as a fallback. |
 | `compass-design` | Shared vocabulary for module depth, seams, and interfaces. Reference material, not a session to run. |
+| `compass-survey` | Scans a codebase for deepening opportunities and discusses them in conversation; once one is agreed, hands off to `compass-navigate` and `compass-task` to land it in the tracker. |
 | `compass-test` | The red/green loop and its anti-patterns. Called by `compass-implement` per vertical slice. |
 | `compass-prototype` | Throwaway code to answer a question that's cheaper to check by running than by reasoning about. |
 | `compass-research` | Reads and understands a codebase, committing durable facts to whatever memory store the project uses. |
@@ -96,4 +97,4 @@ Compass uses a consistent nautical vocabulary rather than reusing terms from the
 - **Log**: the running record of resolved waypoints on a map.
 - **Features**: the map's grouping of its own Log entries into one or more independently shippable specs, filled in once the map clears.
 - **Uncharted water**: work that's in scope but not yet sharp enough to turn into a waypoint.
-- **Seam**, **interface**, **depth**, **leverage**, **locality**: `compass-design`'s vocabulary for module shape. Used consistently across `compass-spec`, `compass-task`, and `compass-test` rather than substituted with "component" or "boundary."
+- **Seam**, **interface**, **depth**, **leverage**, **locality**: `compass-design`'s vocabulary for module shape. Used consistently across `compass-spec`, `compass-task`, `compass-survey`, and `compass-test` rather than substituted with "component" or "boundary."
