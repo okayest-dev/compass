@@ -50,7 +50,7 @@ Done when: the claim write has succeeded and the task shows as claimed.
 
 ### 5. Report
 
-Read the task's full body if the summary needs more detail. Then report one tight summary: the task's id or path, its title, and what it asks. State that it is unblocked and now claimed. A task that reads as unclear or under-specified: say so rather than papering over it, and consider whether it needs a trip back through `compass-decide` before implementation starts. Then hand off to `compass-implement` for the build.
+Read the task's full body if the summary needs more detail. Then report one tight summary: the task's id or path, its title, and what it asks. State that it is unblocked and now claimed. A task that reads as unclear or under-specified: say so rather than papering over it, and consider whether it needs a trip back through `compass-navigate` before implementation starts. Then hand off to `compass-implement` for the build.
 
 Done when: an agent could start the task from the summary alone.
 
