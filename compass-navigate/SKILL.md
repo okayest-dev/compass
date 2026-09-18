@@ -70,7 +70,7 @@ If an answer contradicts something the spec states outright, update the spec in 
 Once the horizon is empty, meaning nothing was wrong or everything found is now resolved, confirm the spec has a durable, typed home before handing off to `compass-task`:
 
 - **Already registered** (`compass-spec` wrote it in this conversation, or it already exists as a typed issue): nothing to do.
-- **No durable home yet** (pasted text, a linked external document, anything not tracked by this project's own tools): create one now. Publish it as a **Feature**, using the tracker's closest equivalent: a Jira Story, a GitHub or Linear issue labelled `feature`, or a `beads` issue created with `-t feature`. Use the spec's own content as the body. This is the same issue type `compass-spec` would have used had it authored the spec itself; `compass-decide` registers it when nobody else did.
+- **No durable home yet** (pasted text, a linked external document, anything not tracked by this project's own tools): create one now. Publish it as a **Feature**, using the tracker's closest equivalent: a Jira Story, a GitHub or Linear issue labelled `feature`, or a `beads` issue created with `-t feature`. Use the spec's own content as the body. This is the same issue type `compass-spec` would have used had it authored the spec itself; `compass-navigate` registers it when nobody else did.
 - **A durable home exists but is untyped** (an issue with no type set, a wiki page): retype or link it so it reads as a Feature going forward, rather than leaving `compass-task` to guess at a parent reference.
 
 Hand off to `compass-task` only once the spec is sane and registered.

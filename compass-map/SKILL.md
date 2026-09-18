@@ -93,7 +93,7 @@ Every waypoint is either **live** (worked *with* a person who speaks for themsel
 
 - **Investigate** (unattended, issue type: Task): reading documentation, third-party references, or local resources to surface a fact a decision waits on. Resolved by dispatching a sub-agent directly to find the fact. No separate skill needed. Use when knowledge outside the current working context is required.
 - **Prototype** (live, issue type: Decision): raise the fidelity of the discussion by making a cheap, rough, concrete artifact to react to, using `compass-prototype`. Link the prototype as an asset. Use when "how should it look" or "how should it behave" is the key question.
-- **Decide** (live, issue type: Decision): conversation. The default case. Use `compass-decide`, and `compass-glossary` if anything resolved is worth recording.
+- **Decide** (live, issue type: Decision): conversation. The default case. Use `compass-navigate`, and `compass-glossary` if anything resolved is worth recording.
 - **Groundwork** (live or unattended, issue type: Task): manual work that must happen before a *decision* can be made. There is nothing to decide, prototype, or investigate, but the discussion is blocked until it is done. Signing up for a service so its capabilities can be judged, provisioning access, moving data so its shape can be seen. This is the one type that *does* rather than decides, and it earns its place by unblocking a decision, not by delivering the destination. The agent drives it alone where it can; otherwise it hands over a precise checklist. Resolved when the work is done; the answer records what was done and any resulting facts (where credentials live, new locations, row counts) later waypoints depend on.
 
 ## Uncharted water
@@ -125,7 +125,7 @@ Two modes. Either way, **never resolve more than one waypoint per session**, wit
 
 Invoked with a loose idea.
 
-1. **Name the destination.** Use `compass-decide` (and `compass-glossary` if terms need pinning down) to settle what this map is finding its way to: the spec, decision, or change. The destination fixes the scope, so it is settled first.
+1. **Name the destination.** Use `compass-navigate` (and `compass-glossary` if terms need pinning down) to settle what this map is finding its way to: the spec, decision, or change. The destination fixes the scope, so it is settled first.
 2. **Map the horizon.** Interview again, **breadth-first** this time: fan out across the whole space rather than deep on any one thread, surfacing the open decisions and the first steps takeable now. **If this surfaces no uncharted water** (the way to the destination is already clear, the whole journey small enough for one session), a map is not needed. Stop and ask how to proceed instead.
 3. **Create the map** (labelled `compass:map`): Destination and Notes filled in, Log empty, the uncharted water sketched into **Not yet specified**.
 4. **Create the waypoints that can be specified now** as children of the map, then wire blocking edges in a **second pass** (items need ids before they can reference each other). Wiring sorts them into the horizon and the blocked; everything not yet specifiable stays uncharted: the **Not yet specified** section.
@@ -138,7 +138,7 @@ Invoked with a map (a link or id). A waypoint is **optional**: without one, the 
 
 1. Load the **map**: the low-res view, not every waypoint's full body.
 2. Choose the waypoint. If one was named, use it. Otherwise take the first horizon waypoint in order. **Claim it**: assign it before any work.
-3. Resolve it. **Zoom as needed**: fetch the full body of any related or closed waypoint on demand; use whichever skills the `## Notes` block names. If in doubt, use `compass-decide` and `compass-glossary`.
+3. Resolve it. **Zoom as needed**: fetch the full body of any related or closed waypoint on demand; use whichever skills the `## Notes` block names. If in doubt, use `compass-navigate` and `compass-glossary`.
 4. Record the resolution: post the answer as a **resolution comment** (or write it into the waypoint file), **close** the waypoint, and **append a pointer** to the map's Log.
 5. Add newly-surfaced waypoints (create, then wire); graduate any uncharted water the answer has made specifiable, clearing each graduated patch from **Not yet specified** so it lives only as its new waypoint. If the answer reveals that a waypoint (this one or another) sits beyond the destination, **rule it out of scope** rather than resolving it on the route. If the decision invalidates other parts of the map, update or delete those waypoints.
 
