@@ -1,11 +1,11 @@
 ---
 name: compass-map
-description: Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision waypoints on your issue tracker (or local files), and resolve them one at a time until the way to the destination is clear.
+description: Plan vague or large bodies of work (more than one agent session can hold) as a shared map of decision waypoints on your issue tracker (or local files), and resolve them one at a time until the way to the destination is clear.
 ---
 
 # Compass Map
 
-A loose idea has arrived, too big for one agent session, still uncharted: the way from here to the **destination** is not visible yet. This skill is about finding that way, not charging at the destination. It charts the way as a **shared map**, then works its **waypoints** (questions whose resolution is a decision, not slices of a build to execute) one at a time until the route is clear.
+The user has come to you with an idea. It is unrefined and vague. There are still many unknowns. The destination is still uncharted: the way from here to the **destination** is not visible yet. This skill is about finding that way, not charging at the destination. It charts the way as a **shared map**, then works its **waypoints** (questions whose resolution is a decision, not slices of a build to execute) one at a time until the route is clear.
 
 ## Consumes / produces / hands off
 
