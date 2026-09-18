@@ -9,9 +9,9 @@ A prototype is **throwaway code that answers a question**. The question decides 
 
 ## Consumes / produces / hands off
 
-- **Consumes:** an open question that is easier to answer by looking at something running than by reasoning about it in the abstract, from `compass-decide`, `compass-map`, or `compass-design`'s "Design It Twice" comparison.
+- **Consumes:** an open question that is easier to answer by looking at something running than by reasoning about it in the abstract, from `compass-navigate`, `compass-map`, or `compass-design`'s "Design It Twice" comparison.
 - **Produces:** a throwaway artifact, a captured answer, and (where the answer encodes a decision precisely) a trimmed snippet worth quoting in a spec.
-- **Called from:** `compass-decide` (when a question is better answered by running code than by more questions), `compass-map` (for a `prototype` waypoint), `compass-design` (when comparing alternative interfaces).
+- **Called from:** `compass-navigate` (when a question is better answered by running code than by more questions), `compass-map` (for a `prototype` waypoint), `compass-design` (when comparing alternative interfaces).
 - **Hands off to:** whichever skill asked for the prototype resumes with the answer in hand; the validated decision (not the prototype code) is what carries forward into `compass-spec`.
 
 ## Pick a branch
