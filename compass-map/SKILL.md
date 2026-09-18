@@ -10,8 +10,8 @@ The user has come to you with an idea. It is unrefined and vague. There are stil
 ## Consumes / produces / hands off
 
 - **Consumes:** a loose, oversized idea, a whole feature area, a migration, a strategic choice, too uncharted to spec directly.
-- **Produces:** a map (destination, log, uncharted water, out-of-scope) and a set of resolved waypoints, each resolved via `compass-decide`, `compass-prototype`, or direct investigation.
-- **Called from:** used directly whenever an idea is too large or too uncharted for `compass-decide` alone.
+- **Produces:** a map (destination, log, uncharted water, out-of-scope) and a set of resolved waypoints, each resolved via `compass-navigate`, `compass-prototype`, or direct investigation.
+- **Called from:** used directly whenever an idea is too large or too uncharted for `compass-navigate` alone.
 - **Hands off to:** `compass-spec`, once the map is clear enough that nothing is left to decide before someone writes the spec.
 
 The destination varies per effort, and naming it is the first act of charting: it shapes every waypoint. It might be a spec to hand off and iterate on, a decision to lock before planning starts, or a change made in place, like a data migration. The map is domain-agnostic: engineering work, content planning, whatever fits the shape.
