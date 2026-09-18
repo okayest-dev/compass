@@ -1,9 +1,9 @@
 ---
-name: compass-decide
+name: compass-navigate
 description: Interview relentlessly to sharpen a plan, decision, or idea until there's a shared understanding, or sanity-check an existing spec and register it as a Feature before compass-task runs. Use when stress-testing thinking, resolving an open decision, or when a spec has been provided and needs vetting before implementation starts.
 ---
 
-# Compass Decide
+# Compass Navigate
 
 Interview whoever owns the decision relentlessly until there is a shared understanding. Map this as a **decision tree**: every decision branches into the decisions that hang off it.
 
