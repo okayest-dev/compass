@@ -18,18 +18,27 @@ done
 
 ## The pipeline
 
+`compass-navigate` runs twice: once to sharpen decisions before a spec exists, once to sanity-check the spec afterward. Getting to a spec looks like this:
+
 ```
-compass-map ──▶ compass-spec ──▶ compass-navigate ──▶ compass-task ──▶ compass-horizon ──▶ compass-implement ──▶ compass-review
-   (Epic)          (Feature)      (sanity check)         (Tasks)        (pick one up)        (build it)         (check it)
+compass-navigate (decide) ──▶ compass-spec
+        or, for large or vague efforts:
+compass-map (waypoints, each resolved via compass-navigate/compass-prototype) ──▶ compass-spec
 ```
 
-Most work does not start at `compass-map`. That skill exists for ideas too big or too vague for one session. Skip straight to `compass-navigate` or `compass-spec` for anything that fits in a normal working session.
+Neither path writes a formal artifact bridging navigate and spec directly. The direct path hands off through shared conversation history, since decide-then-spec is expected to happen in one sitting. The map path hands off through the map's Log instead, since a map is explicitly meant to span sessions a single conversation can't. Anything hard-to-reverse gets a durable trace either way, via `compass-glossary`.
+
+From a spec to done, every spec passes through the same gate regardless of which path produced it:
+
+```
+compass-spec ──▶ compass-navigate (sanity-check, register as Feature) ──▶ compass-task ──▶ compass-horizon ──▶ compass-implement ──▶ compass-review
+```
 
 | Skill | Role |
 |---|---|
 | `compass-map` | Decomposes an oversized or vague effort into waypoints (an Epic and its children) before a spec can be written. |
-| `compass-spec` | Synthesises a spec from the current conversation and publishes it as a Feature. |
-| `compass-navigate` | The gate every spec passes through: sanity-checks it against the codebase and glossary, resolves anything missing, and registers it as a Feature if nobody has yet. Also the general-purpose decision interview, used on its own for anything smaller than a full spec. |
+| `compass-navigate` | The decision interview: sharpens an idea before `compass-spec` writes it up, or sanity-checks and registers a spec (as a Feature) before `compass-task` breaks it down. Runs at both points, not just one. |
+| `compass-spec` | Synthesises a spec from the resolved decisions in the conversation, or a cleared map's Log, and publishes it as a Feature. |
 | `compass-task` | Breaks a spec, a plan, or the current conversation into vertical-slice Tasks with explicit blocking edges. |
 | `compass-horizon` | Picks the next unblocked, unclaimed Task off the backlog and claims it. Prefers the current Epic or Feature when one is in context. |
 | `compass-implement` | Builds one Task: drives `compass-test`, commits, hands off for review. |
