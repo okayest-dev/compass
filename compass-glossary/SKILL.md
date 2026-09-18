@@ -11,7 +11,7 @@ Build and sharpen the project's shared vocabulary and decision history as you de
 
 - **Consumes:** a live conversation where terminology is unclear, contested, or about to be locked in, or a decision that is hard to reverse.
 - **Produces:** structured facts and decisions in this project's persistent memory tool, when one is configured. Falls back to `CONTEXT.md` (glossary) and `docs/adr/NNNN-slug.md` (decision records) only when no such tool exists.
-- **Called from:** `compass-decide`, `compass-map`, `compass-spec`, `compass-implement`, `compass-review`, or any skill that needs shared vocabulary or needs to record a hard-to-reverse choice.
+- **Called from:** `compass-navigate`, `compass-map`, `compass-spec`, `compass-implement`, `compass-review`, or any skill that needs shared vocabulary or needs to record a hard-to-reverse choice.
 - **Hands off to:** nothing. This skill only writes memory or files; it does not trigger the next phase.
 
 ## Pick a store, once, before writing anything
