@@ -36,9 +36,9 @@ compass-spec ──▶ compass-navigate (sanity-check, register as Feature) ─�
 
 | Skill | Role |
 |---|---|
-| `compass-map` | Decomposes an oversized or vague effort into waypoints (an Epic and its children) before a spec can be written. |
-| `compass-navigate` | The decision interview: sharpens an idea before `compass-spec` writes it up, or sanity-checks and registers a spec (as a Feature) before `compass-task` breaks it down. Runs at both points, not just one. |
+| `compass-map` | Decomposes an oversized or vague effort into waypoints (an Epic and its children) before a spec can be written. Hands off straight to `compass-spec`; `compass-navigate` is used internally, per waypoint, not as a separate step in between. |
 | `compass-spec` | Synthesises a spec from the resolved decisions in the conversation, or a cleared map's Log, and publishes it as a Feature. |
+| `compass-navigate` | The decision interview: sharpens an idea before `compass-spec` writes it up (directly, or per waypoint inside `compass-map`), or sanity-checks and registers an existing spec (as a Feature) before `compass-task` breaks it down. Runs at both points, not just one, but only ever as its own top-level step before `compass-spec` on the direct path; the map path folds that role into the map itself. |
 | `compass-task` | Breaks a spec, a plan, or the current conversation into vertical-slice Tasks with explicit blocking edges. |
 | `compass-horizon` | Picks the next unblocked, unclaimed Task off the backlog and claims it. Prefers the current Epic or Feature when one is in context. |
 | `compass-implement` | Builds one Task: drives `compass-test`, commits, hands off for review. |
