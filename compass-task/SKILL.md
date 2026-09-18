@@ -9,9 +9,9 @@ Break a plan, spec, or conversation into a set of **tasks**: tracer-bullet verti
 
 ## Consumes / produces / hands off
 
-- **Consumes:** a spec that has already been through `compass-decide`'s sanity check and Feature registration; a plan; or the current conversation, for lighter-weight work with no formal spec.
+- **Consumes:** a spec that has already been through `compass-navigate`'s sanity check and Feature registration; a plan; or the current conversation, for lighter-weight work with no formal spec.
 - **Produces:** a set of vertical-slice **Task**-type issues with explicit blocking edges, published wherever this project tracks work.
-- **Called from:** `compass-decide`, once a spec is confirmed sane and registered; or directly, once a plan or the current conversation contains enough decisions to break into tasks without a formal spec.
+- **Called from:** `compass-navigate`, once a spec is confirmed sane and registered; or directly, once a plan or the current conversation contains enough decisions to break into tasks without a formal spec.
 - **Hands off to:** `compass-horizon`, to pick up the first unblocked task and hand it to `compass-implement`. A task can also go straight to `compass-implement` if it has already been chosen and claimed.
 
 ## Issue type
@@ -20,11 +20,11 @@ Every item this skill produces is a **Task** (use the tracker's closest equivale
 
 ## Process
 
-### 0. Confirm the spec has cleared compass-decide
+### 0. Confirm the spec has cleared compass-navigate
 
 Skip this step when working from a plan or the current conversation with no formal spec behind it. Go straight to step 1.
 
-When working from a spec, do not draft a single task until it has been through `compass-decide`'s sanity check and Feature registration (see that skill's "Sanity-checking a provided spec" section). This applies whether the spec just came from `compass-spec` or was handed in directly, including a spec pasted straight into this conversation. If that has not happened yet, stop and hand off to `compass-decide` now; resume here only once it confirms the spec is sane and registered.
+When working from a spec, do not draft a single task until it has been through `compass-navigate`'s sanity check and Feature registration (see that skill's "Sanity-checking a provided spec" section). This applies whether the spec just came from `compass-spec` or was handed in directly, including a spec pasted straight into this conversation. If that has not happened yet, stop and hand off to `compass-navigate` now; resume here only once it confirms the spec is sane and registered.
 
 ### 1. Gather context
 
