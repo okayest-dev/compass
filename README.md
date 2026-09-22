@@ -16,6 +16,8 @@ for skill in ~/skills/compass/compass-*; do
 done
 ```
 
+Run `compass-onboarding` once per repo before using any other skill here. It records the issue tracker's mechanics (issue-type mapping, horizon query, claim operation, ready-for-implementer label) and the memory store `compass-glossary` writes to, in a `## Compass setup` block in `AGENTS.md`/`CLAUDE.md`, so `compass-horizon`, `compass-map`, `compass-task`, `compass-spec`, and `compass-glossary` don't each have to rediscover it from scratch every session.
+
 ## The pipeline
 
 `compass-navigate` runs twice: once to sharpen decisions before a spec exists, once to sanity-check the spec afterward. Getting to a spec looks like this:
@@ -53,6 +55,7 @@ Cross-cutting skills, called from wherever they're needed rather than as fixed p
 
 | Skill | Role |
 |---|---|
+| `compass-onboarding` | Run once per repo, before any other skill here. Records the tracker's mechanics and the memory store the rest of the pipeline reads from `AGENTS.md`/`CLAUDE.md`. |
 | `compass-glossary` | The project's shared vocabulary and decision history. A persistent memory tool first, `CONTEXT.md`/`docs/adr/` only as a fallback. |
 | `compass-design` | Shared vocabulary for module depth, seams, and interfaces. Reference material, not a session to run. |
 | `compass-survey` | Scans a codebase for deepening opportunities and discusses them in conversation; once one is agreed, hands off to `compass-navigate` and `compass-task` to land it in the tracker. |
