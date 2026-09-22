@@ -50,12 +50,13 @@ Read it fully before forming a single question. A partial read produces sanity-c
 
 ### 2. Build the horizon from gaps, not from scratch
 
-Walk the spec's sections (User Stories, Implementation Decisions, Testing Decisions, or their equivalents) against:
+Walk the spec's sections (User Stories, Implementation Decisions, Testing Decisions, Security Decisions, or their equivalents) against:
 
 - **The codebase**: does anything the spec assumes about existing modules, seams, or data actually hold? Use `compass-design` if a claimed seam doesn't match what is there.
 - **The glossary**: does the spec's vocabulary match the recorded model (see `compass-glossary`)? Flag terms used inconsistently with it.
 - **Internal consistency**: do two sections of the spec contradict each other, for example a User Story implying behaviour the Implementation Decisions rule out, or the reverse?
 - **Completeness**: is there a decision a reasonable implementer would need that the spec is silent on?
+- **Security**: does the spec name its trust boundaries, sensitive data, and authorisation changes, or explicitly state that none apply? A feature that clearly takes new external input, handles a credential, or changes who can do what, with no Security Decisions section or an empty one and no stated reason, is incomplete, not merely light on detail. Raise it as a horizon question rather than filling it in yourself; the answer belongs to whoever owns the work.
 
 Only what fails one of these checks becomes a horizon question. A spec with nothing wrong produces an empty horizon. Say so, and go straight to registration (step 4). Do not run an interview to fill time.
 

@@ -26,7 +26,16 @@ Publish the spec as a **Feature** (use the tracker's closest equivalent: a Jira 
 
    Check that these seams match expectations before moving on.
 
-3. Write the spec using the template below, then publish it as a Feature (see [Issue type](#issue-type) above): as an issue on this project's tracker if one is documented, otherwise a file under a local `specs/` directory, with `Type: feature` noted at the top. Apply whatever label or tag this project uses to mark work as ready for an implementer. If no such convention exists yet, say so explicitly at the top of the spec rather than inventing one.
+3. Identify the feature's trust boundaries and data sensitivity. Ask, specifically:
+
+   - Does this feature accept input from a new or wider set of callers (a new endpoint, a new file format parsed, a new message source)?
+   - Does it store, log, or transmit a credential, secret, token, or personal data it did not touch before?
+   - Does it change who can do what: a new authentication path, a new authorisation check, a new role or permission?
+   - Does it call out to a new external system or fetch a URL built from caller-supplied input?
+
+   Any "yes" becomes a line in **Security Decisions** below, naming the boundary and how it is guarded. If every answer is "no," say so explicitly in that section rather than leaving it empty; an empty section reads as unconsidered, not as considered-and-clear.
+
+4. Write the spec using the template below, then publish it as a Feature (see [Issue type](#issue-type) above): as an issue on this project's tracker if one is documented, otherwise a file under a local `specs/` directory, with `Type: feature` noted at the top. Apply whatever label or tag this project uses to mark work as ready for an implementer. If no such convention exists yet, say so explicitly at the top of the spec rather than inventing one.
 
 <spec-template>
 
@@ -73,6 +82,17 @@ A list of testing decisions that were made. Include:
 - A description of what makes a good test here (only test observable behaviour, not implementation details, see `compass-test`).
 - Which modules will be tested.
 - Prior art for the tests: similar tests already in the codebase.
+
+## Security Decisions
+
+The trust boundaries and data sensitivity identified in step 3, and how each is guarded. Include:
+
+- **Trust boundaries**: where new or wider input arrives from (a new endpoint, a new file format, a new caller), and what validates it before it is used.
+- **Data sensitivity**: any credential, secret, token, or personal data this feature stores, logs, or transmits, and how it is protected in each of those states.
+- **Authentication and authorisation**: who can invoke the feature, how that is enforced, and where the check lives.
+- **New external calls**: any outbound request to another system, especially one built from caller-supplied input, and what restricts its destination.
+
+If step 3 found nothing (no new trust boundary, no new sensitive data, no authorisation change, no new outbound call), write that explicitly: "No new trust boundaries, sensitive data, or authorisation changes identified." An absent section and a considered "none" read identically to `compass-navigate` and `compass-review`; only the second one is correct.
 
 ## Out of Scope
 

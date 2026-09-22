@@ -34,6 +34,9 @@ From a spec to done, every spec passes through the same gate regardless of which
 
 ```
 compass-spec ──▶ compass-navigate (sanity-check, register as Feature) ──▶ compass-task ──▶ compass-horizon ──▶ compass-implement ──▶ compass-review
+                                                                                                                          ▲                     │
+                                                                                                                          └─────── Blocked ──────┘
+                                                                                                                          (loops until Clear, or an owner-accepted exception is recorded)
 ```
 
 | Skill | Role |
@@ -44,7 +47,7 @@ compass-spec ──▶ compass-navigate (sanity-check, register as Feature) ─�
 | `compass-task` | Breaks a spec, a plan, or the current conversation into vertical-slice Tasks with explicit blocking edges. |
 | `compass-horizon` | Picks the next unblocked, unclaimed Task off the backlog and claims it. Prefers the current Epic or Feature when one is in context. |
 | `compass-implement` | Builds one Task: drives `compass-test`, commits, hands off for review. |
-| `compass-review` | Two-axis review of a diff: does it follow this project's standards, and does it match the spec it claims to implement. |
+| `compass-review` | Three-axis review of a diff: does it follow this project's standards, does it match the spec it claims to implement, and does it introduce or fail to mitigate a security weakness. Ends in a Clear or Blocked verdict that gates `compass-implement`, not just an advisory report. |
 
 Cross-cutting skills, called from wherever they're needed rather than as fixed pipeline steps:
 
@@ -78,7 +81,9 @@ These map onto whatever the project's own tracker calls them (a Jira Story or Ta
 
 **Claim before you start, close when you're done.** Every task-touching skill treats the claim as the first write of a session, specifically so two sessions can't pick up the same task. If `compass-horizon` already claimed it, `compass-implement` doesn't re-claim it. Check before assuming you need to.
 
-**Don't merge the two review axes.** `compass-review`'s Standards and Spec findings are reported side by side on purpose. A change can pass one and fail the other. Collapsing them into one ranked list hides that.
+**Don't merge the review axes.** `compass-review`'s Standards, Spec, and Security findings are reported side by side on purpose. A change can pass some and fail others, a security weakness in particular is often invisible to the other two. Collapsing them into one ranked list hides that.
+
+**Let `compass-review`'s verdict gate the task, not just inform it.** A Blocked verdict means `compass-implement` fixes and re-reviews, not commits anyway because most of the diff looked fine. The only ways past a blocking finding are fixing it or getting an explicit, recorded exception from whoever owns the task; neither `compass-review` nor `compass-implement` grants that exception to itself.
 
 **Group by what the map already shows, don't force a split.** `compass-map`'s blocking edges and shared destinations already say which waypoints belong together; use those instead of inventing a new signal. One feature covering a whole cleared map is a correct outcome, not an unfinished one. Splitting a small map into several thin features is as much a mistake as cramming a genuinely multi-feature epic into one sprawling spec.
 
