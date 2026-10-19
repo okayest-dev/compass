@@ -26,7 +26,7 @@ Decide the type before creating anything. Do not leave it untyped and deferred t
   - `prototype` and `decide` waypoints are **Decisions**. Use `beads -t decision` where the tracker has that type natively. Where it does not, use a Task and say so explicitly in the body ("this task resolves a decision, not a build step") so it is not mistaken for implementation work later.
 - **The Epic's children include one or more Features**, one per group `compass-spec` writes up once the map clears. An Epic with a single Feature child is a normal, complete outcome; nothing about the Epic/Feature relationship requires more than one.
 
-## Plan, don't do
+## Plan, don't implement
 
 This skill is **planning** by default: each waypoint resolves a decision, and the map is done when the way is clear, with nothing left to decide before someone goes and does the thing. The pull to just do the work is usually the signal that the edge of the map has been reached and it is time to hand off. An effort can override this in its **Notes**, carrying execution into the map itself, but absent that, produce decisions, not deliverables.
 
@@ -105,7 +105,7 @@ Every waypoint is either **live** (worked *with* a person who speaks for themsel
 
 ## Uncharted water
 
-The map is *deliberately* incomplete: do not chart what cannot yet be seen. Beyond the live waypoints lies **uncharted water**: the dim view of decisions and investigations that are clearly coming but cannot yet be pinned down, because they hang on questions still open. Resolving a waypoint charts the water ahead of it, graduating whatever is now specifiable into fresh waypoints, one at a time, until the way to the destination is clear and no waypoints remain.
+The map is *deliberately* incomplete: do not chart what cannot yet be seen. Beyond the known waypoints lies **uncharted water**: the dim view of decisions and investigations that are clearly coming but cannot yet be pinned down, because they hang on questions still open. Resolving a waypoint charts the water ahead of it, graduating whatever is now specifiable into fresh waypoints, one at a time, until the way to the destination is clear and no waypoints remain.
 
 The map's **Not yet specified** section is where that dim view is written down: the suspected question, the area to revisit later. It is the undiscovered horizon *toward* the destination: everything here is in scope, just not sharp enough to waypoint yet. Write as loosely or as fully as the view allows; it doubles as a signpost for collaborators reading where the effort is headed.
 
