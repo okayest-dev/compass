@@ -12,7 +12,7 @@ Interview whoever owns the decision relentlessly until there is a shared underst
 - **Consumes:** an idea, plan, or open decision that is not yet sharp enough to act on, or an existing spec, self-authored or handed in from outside this conversation, that needs sanity-checking before implementation starts.
 - **Produces:** a resolved decision, recorded via `compass-glossary` when it is hard to reverse. For a spec, a confirmed (or corrected) spec registered as a Feature-type issue.
 - **Called from:** `compass-map` (one waypoint at a time); directly whenever a decision needs sharpening before `compass-spec` can be written; directly as the first port of call whenever a spec is provided, before `compass-task` touches it.
-- **Hands off to:** `compass-glossary` to record anything hard to reverse; `compass-spec` once enough decisions exist to write a fresh spec; `compass-task` once a provided spec has been sanity-checked and registered as a Feature; `compass-prototype` when a question is better answered by running code than by more questions.
+- **Hands off to:** `compass-glossary` to record anything hard to reverse; `compass-spec` once enough decisions exist to write a fresh spec; `compass-task` once a provided spec has been sanity-checked and registered as a Feature; `compass-prototype` when a question is better answered by running code than by more questions; `compass-investigate` when a horizon question needs targeted fact-finding (repro, code search, prior art, clarification, dependency map).
 
 ## Run the interview
 
@@ -34,9 +34,11 @@ Recommended: <recommended answer>
 
 Each round's answers reshape the tree. Settled decisions push the horizon outward and unblock questions that depended on them. Recompute the horizon and ask the next round. A question whose answer depends on another question still open this round belongs to a *later* round, not this one.
 
-Finding **facts** is always this skill's job, never the other party's. When a horizon question needs a fact from the environment (files, tools, existing code, prior records), dispatch a sub-agent to find it. Do not ask for anything that can be looked up directly. Do not block on it either: a running lookup is an unsettled prerequisite, so only the questions downstream of it wait. Ask the rest of the horizon now. The **decisions** themselves belong to the person being interviewed. Put each to them and wait.
+Finding **facts** is always this skill's job, never the other party's. When a horizon question needs a fact from the environment (files, tools, existing code, prior records), dispatch to `compass-investigate` for targeted fact-finding. Do not ask for anything that can be looked up directly. Do not block on it either: a running investigation is an unsettled prerequisite, so only the questions downstream of it wait. Ask the rest of the horizon now. The **decisions** themselves belong to the person being interviewed. Put each to them and wait.
 
 If a question is better answered by comparing running code than by more rounds of questions, pause and use `compass-prototype` to build a slimmed-down comparison, then resume the interview with the result in hand.
+
+`compass-investigate` can be invoked incrementally during an interview. If a follow-up fact is needed later, request a **supplemental investigation** scoped to the new question rather than a full re-run. The investigation record is updated in place.
 
 The session is done when the horizon is empty: every branch of the decision tree visited, nothing left silently assumed. Do not act on the outcome until it is confirmed that a shared understanding has been reached.
 

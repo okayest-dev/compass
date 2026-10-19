@@ -1,6 +1,6 @@
 ---
 name: compass-research
-description: Read and understand the codebase that you are working in. Apply when the user asks you to examine, research, check or look into all or part of the codebase
+description: Read the codebase to build deep understanding for design and debugging. Use when you need to understand architecture, conventions, and patterns across a codebase area. For targeted fact-finding (bug repro, code search, prior art), use `compass-investigate` instead.
 ---
 
 # Compass Research
@@ -37,6 +37,13 @@ Facts must be backed by examples. They must include a useful summary and also a 
 ## Output
 
 All new facts must be summarised for the user. The user can reject or correct facts. The user's input is authoritative unless you can categorically demonstrate the user is wrong.
+
+
+## Boundary with compass-investigate
+
+- **compass-research**: broad, open-ended codebase understanding for design decisions. "How does this codebase work?" "What are the architectural patterns?" Scope is a module, subsystem, or pain point. Output goes to persistent memory.
+- **compass-investigate**: targeted fact-finding for a specific question. "Is X broken?" "How does A call B?" "Has Y been tried?" Scope is a precise investigation requirement. Output is an investigation record with recommended next skill.
+- If the goal is "understand this area to design a feature," use research. If the goal is "answer this question to unblock a decision," use investigate.
 
 
 
