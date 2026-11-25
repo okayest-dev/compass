@@ -1,6 +1,6 @@
 ---
 name: compass-horizon
-description: Fetch and claim the next available task from the project's task backlog (beads, GitHub, GitLab, Linear, Jira, local files, or other, detected from however this project documents its tracker workflow). If an epic or feature is already in context, prefers tasks under it. Use at session start to pick up work, when asked what to work on next, or to grab the next task after finishing one.
+description: "Fetch and claim the next available task from the project's task backlog (beads, GitHub, GitLab, Linear, Jira, local files, or other, detected from however this project documents its tracker workflow). If an epic or feature is already in context, prefers tasks under it. Use at session start to pick up work, when asked what to work on next, or to grab the next task after finishing one."
 ---
 
 # Compass Horizon

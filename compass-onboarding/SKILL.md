@@ -1,6 +1,6 @@
 ---
 name: compass-onboarding
-description: "Configure this repo for Compass: the issue tracker's mechanics for each Compass issue type, the horizon query and claim operation, the ready-for-implementer label, and the memory store compass-glossary writes to. Run once before first use of the other Compass skills."
+description: ""Configure this repo for Compass: the issue tracker's mechanics for each Compass issue type, the horizon query and claim operation, the ready-for-implementer label, and the memory store compass-glossary writes to. Run once before first use of the other Compass skills.""
 disable-model-invocation: true
 ---
 

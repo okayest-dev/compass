@@ -1,6 +1,6 @@
 ---
 name: compass-survey
-description: Survey a codebase for deepening opportunities, present them for discussion, then hand the agreed candidate to compass-navigate and compass-task to land it in the tracker. Use when auditing architecture, hunting for shallow modules, or asked to find refactor candidates.
+description: "Survey a codebase for deepening opportunities, present them for discussion, then hand the agreed candidate to compass-navigate and compass-task to land it in the tracker. Use when auditing architecture, hunting for shallow modules, or asked to find refactor candidates."
 ---
 
 # Compass Survey

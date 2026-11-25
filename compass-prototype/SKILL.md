@@ -1,6 +1,6 @@
 ---
 name: compass-prototype
-description: Build a throwaway prototype to answer a design question. Use when checking whether a state model, workflow, or interface feels right by driving it directly, or when comparing two or more candidate approaches side by side before committing to one.
+description: "Build a throwaway prototype to answer a design question. Use when checking whether a state model, workflow, or interface feels right by driving it directly, or when comparing two or more candidate approaches side by side before committing to one."
 ---
 
 # Compass Prototype

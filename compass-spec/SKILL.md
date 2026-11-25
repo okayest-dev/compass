@@ -1,6 +1,6 @@
 ---
 name: compass-spec
-description: Turn the current conversation into a spec and publish it. No interview, just synthesis of what has already been discussed.
+description: "Turn the current conversation into a spec and publish it. No interview, just synthesis of what has already been discussed."
 ---
 
 # Compass Spec

@@ -1,6 +1,6 @@
 ---
 name: compass-refactor
-description: Behavior-preserving simplification of a module or seam per an agreed deepening decision. Writes characterization tests first, transforms in incremental verified steps, commits atomically, passes compass-review. Use when a compass-survey candidate has been through compass-navigate and compass-task and the resulting task is "refactor X to deepen module Y per decision Z."
+description: "Behavior-preserving simplification of a module or seam per an agreed deepening decision. Writes characterization tests first, transforms in incremental verified steps, commits atomically, passes compass-review. Use when a compass-survey candidate has been through compass-navigate and compass-task and the resulting task is "refactor X to deepen module Y per decision Z.""
 ---
 
 # Compass Refactor

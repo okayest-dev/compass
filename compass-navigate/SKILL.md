@@ -1,6 +1,6 @@
 ---
 name: compass-navigate
-description: Interview relentlessly to sharpen a plan, decision, or idea until there's a shared understanding, or sanity-check an existing spec and register it as a Feature before compass-task runs. Use when stress-testing thinking, resolving an open decision, or when a spec has been provided and needs vetting before implementation starts.
+description: "Interview relentlessly to sharpen a plan, decision, or idea until there's a shared understanding, or sanity-check an existing spec and register it as a Feature before compass-task runs. Use when stress-testing thinking, resolving an open decision, or when a spec has been provided and needs vetting before implementation starts."
 ---
 
 # Compass Navigate

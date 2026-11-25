@@ -1,6 +1,6 @@
 ---
 name: compass-task
-description: Break a plan, spec, or the current conversation into a set of tracer-bullet tasks, each declaring its blocking edges, published wherever this project tracks work.
+description: "Break a plan, spec, or the current conversation into a set of tracer-bullet tasks, each declaring its blocking edges, published wherever this project tracks work."
 ---
 
 # Compass Task

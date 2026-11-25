@@ -1,6 +1,6 @@
 ---
 name: compass-git
-description: Generic git workflow skills: atomic commit splitting, stacked PR rebase, bisect regression, conflict resolution, safe history rewrite, undo recovery, branch cleanup. Tracker-agnostic, works with any git repo.
+description: ""Generic git workflow skills: atomic commit splitting, stacked PR rebase, bisect regression, conflict resolution, safe history rewrite, undo recovery, branch cleanup. Tracker-agnostic, works with any git repo.""
 ---
 
 # Compass Git

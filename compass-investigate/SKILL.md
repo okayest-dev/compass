@@ -1,6 +1,6 @@
 ---
 name: compass-investigate
-description: Targeted fact-finding for a specific investigation requirement. Use when you need to reproduce a bug, search code, find prior art, clarify requirements, or map dependencies before deciding how to proceed.
+description: "Targeted fact-finding for a specific investigation requirement. Use when you need to reproduce a bug, search code, find prior art, clarify requirements, or map dependencies before deciding how to proceed."
 ---
 
 # Compass Investigate

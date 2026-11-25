@@ -1,6 +1,6 @@
 ---
 name: compass-glossary
-description: Build and sharpen a project's shared vocabulary and decision history, using the project's persistent memory tool as the primary store and CONTEXT.md/decision records only as a fallback. Use when discussing codebase terminology or recording a decision that is hard to reverse.
+description: "Build and sharpen a project's shared vocabulary and decision history, using the project's persistent memory tool as the primary store and CONTEXT.md/decision records only as a fallback. Use when discussing codebase terminology or recording a decision that is hard to reverse."
 ---
 
 # Compass Glossary

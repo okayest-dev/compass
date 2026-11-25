@@ -1,6 +1,6 @@
 ---
 name: compass-test
-description: Test-driven development, language-agnostic. Use when building a feature or fixing a bug test-first, following a red-green-refactor loop, or writing integration-style tests.
+description: "Test-driven development, language-agnostic. Use when building a feature or fixing a bug test-first, following a red-green-refactor loop, or writing integration-style tests."
 ---
 
 # Compass Test

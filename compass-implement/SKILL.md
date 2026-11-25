@@ -1,6 +1,6 @@
 ---
 name: compass-implement
-description: Implement a piece of work based on a spec or a set of tasks.
+description: "Implement a piece of work based on a spec or a set of tasks."
 ---
 
 # Compass Implement

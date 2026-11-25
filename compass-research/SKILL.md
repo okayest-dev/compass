@@ -1,6 +1,6 @@
 ---
 name: compass-research
-description: Read the codebase to build deep understanding for design and debugging. Use when you need to understand architecture, conventions, and patterns across a codebase area. For targeted fact-finding (bug repro, code search, prior art), use `compass-investigate` instead.
+description: "Read the codebase to build deep understanding for design and debugging. Use when you need to understand architecture, conventions, and patterns across a codebase area. For targeted fact-finding (bug repro, code search, prior art), use `compass-investigate` instead."
 ---
 
 # Compass Research
