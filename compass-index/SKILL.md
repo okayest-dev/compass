@@ -1,6 +1,6 @@
 ---
 name: compass-index
-description: ""Read-only reference: list all Compass skills with their consumes/produces/hands-off, and show the pipeline diagram. Use when you need to discover which skill fits your situation.""
+description: "Read-only reference: list all Compass skills with their consumes/produces/hands-off, and show the pipeline diagram. Use when you need to discover which skill fits your situation."
 ---
 
 # Compass Index

@@ -1,6 +1,6 @@
 ---
 name: compass-quick-implement
-description: ""Implement a small, self-contained change in one session: short spec in conversation, test-first implementation, single commit, done. Use when the work is one behaviour, a few files, no new contract or dependency.""
+description: "Implement a small, self-contained change in one session: short spec in conversation, test-first implementation, single commit, done. Use when the work is one behaviour, a few files, no new contract or dependency."
 ---
 
 # Compass Quick Implement

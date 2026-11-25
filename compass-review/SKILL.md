@@ -1,6 +1,6 @@
 ---
 name: compass-review
-description: ""Review the changes since a fixed point (commit, branch, tag, or merge-base) along three axes: Standards (does the code follow this project's documented coding standards?), Spec (does the code match what the originating spec asked for?), and Security (does the change introduce or fail to mitigate a security weakness?). Runs all three as parallel sub-agents, reports them side by side, and ends in a Clear or Blocked verdict that gates whether the work is done. Use when reviewing a branch, work-in-progress changes, or asked to review since a given point, or whenever a security review is specifically requested.""
+description: "Review the changes since a fixed point (commit, branch, tag, or merge-base) along three axes: Standards (does the code follow this project's documented coding standards?), Spec (does the code match what the originating spec asked for?), and Security (does the change introduce or fail to mitigate a security weakness?). Runs all three as parallel sub-agents, reports them side by side, and ends in a Clear or Blocked verdict that gates whether the work is done. Use when reviewing a branch, work-in-progress changes, or asked to review since a given point, or whenever a security review is specifically requested."
 ---
 
 # Compass Review
