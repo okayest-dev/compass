@@ -1,6 +1,6 @@
 ---
 name: compass-index
-description: Read-only reference: list all Compass skills with their consumes/produces/hands-off, and show the pipeline diagram. Use when you need to discover which skill fits your situation.
+description: "Read-only reference: list all Compass skills with their consumes/produces/hands-off, and show the pipeline diagram. Use when you need to discover which skill fits your situation."
 ---
 
 # Compass Index
@@ -19,7 +19,7 @@ Discoverable reference for the Compass skill set. No execution, no routing — j
 | `compass-task` | Spec (cleared by navigate) OR plan/conversation | Task-type issues with blocking edges | `compass-horizon` |
 | `compass-horizon` | Task backlog | One claimed Task | `compass-implement` |
 | `compass-implement` | Task (claimed) | Working, tested code committed | `compass-review` |
-| `compass-review` | Diff + originating spec | Two-axis findings report (Standards + Spec) | Back to `compass-implement` for fixes |
+| `compass-review` | Diff + originating spec | Three-axis findings report (Standards + Spec + Security) | Back to `compass-implement` for fixes |
 
 ### Cross-cutting skills (called from anywhere)
 
@@ -53,7 +53,7 @@ flowchart TD
     F[Vague/large idea] --> D
     
     %% Map path
-    D -->|waypoints resolved via navigate/investigate/prototype| G[Map clears → Features]
+    D -->|waypoints resolved via navigate/investigate/prototype| G[Map clears -> Features]
     G -->|one spec per Feature| H[compass-spec]
     
     %% Direct path
@@ -65,7 +65,7 @@ flowchart TD
     I -->|Tasks with blocking edges| J[compass-horizon]
     J -->|Next unblocked task| K[compass-implement]
     K -->|Test-driven via compass-test| L[compass-review]
-    L -->|Standards + Spec findings| K
+    L -->|Standards + Spec + Security findings| K
     L -->|Clean| M[Done]
     
     %% Cross-cutting (available everywhere)

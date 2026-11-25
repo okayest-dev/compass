@@ -1,6 +1,6 @@
 # Compass
 
-A tool-agnostic set of agent skills for planning and delivering work through a decisions, spec, tasks, implement pipeline. Compass takes its shape from Matt Pocock's skills package, replacing the JavaScript-specific examples with language-agnostic prose and preferring a persistent memory tool over markdown files for project knowledge.
+A tool-agnostic set of agent skills for planning and delivering work through a decisions, spec, tasks, implement pipeline.
 
 ## Install
 
@@ -74,7 +74,7 @@ Every skill that creates tracked work names its type explicitly, rather than lea
 
 These map onto whatever the project's own tracker calls them (a Jira Story or Task, a GitHub or Linear label, a `beads -t` type, a local file's `Type:` field). No skill hardcodes one tracker's API. Each one lists two or three concrete examples and falls back to local files when nothing is configured.
 
-## Best practices
+## Best practices for users
 
 **Let `compass-navigate` gate every spec, even one that looks complete.** An extensive spec handed in from outside the conversation still gets sanity-checked before `compass-task` touches it. Skipping this because the spec looks thorough is exactly the case it exists to catch: a gap that reads as obvious once you're implementing it and invisible on a first read.
 
@@ -90,19 +90,17 @@ These map onto whatever the project's own tracker calls them (a Jira Story or Ta
 
 **Group by what the map already shows, don't force a split.** `compass-map`'s blocking edges and shared destinations already say which waypoints belong together; use those instead of inventing a new signal. One feature covering a whole cleared map is a correct outcome, not an unfinished one. Splitting a small map into several thin features is as much a mistake as cramming a genuinely multi-feature epic into one sprawling spec.
 
-**There's no router skill.** Unlike Matt Pocock's `ask-matt`, nothing here decides which skill to use for you. Each `SKILL.md` states its own consumes, produces, and hands off at the top, so the whole pipeline is readable from any single file without a separate map of the system.
-
-**Keep cross-references in sync when renaming a skill.** Renaming one skill (`compass-decide` became `compass-navigate`) means grepping every other `SKILL.md` for the old name, not just the ones you remember touching it. A stale reference points at a skill that no longer exists, and nobody notices until someone reads that exact line.
-
-**No tool-specific language, no em dashes.** Examples name concrete tools (`beads`, Jira, GitHub, Linear) but the mechanism is always described generically first. Style follows the same rule throughout: periods and commas, not em dashes; sentence-case headings; pseudocode instead of language-specific snippets.
-
 ## Vocabulary
 
 Compass uses a consistent nautical vocabulary rather than reusing terms from the packages it draws on, partly to avoid colliding with them:
 
-- **Waypoint**: a single open question on a `compass-map` map. Not the same as a Task.
-- **Horizon**: the set of open, unblocked, unclaimed items ready to pick up, whether waypoints on a map or tasks in the backlog.
+- **Destination**: what the map is finding its way to — a spec, a decision, or a change. Named first; fixes scope; shapes every waypoint.
+- **Charting**: the act of creating the map. "Do not chart what cannot yet be seen" — only what is sharp enough becomes a waypoint.
+- **Waypoint**: a single open question on a `compass-map`. Not the same as a Task.
+- **Blocking edges**: dependencies between waypoints; a waypoint is unblocked when all its dependencies are resolved.
+- **Horizon**: the set of open, unblocked, unclaimed items ready to pick up — whether waypoints on a map or tasks in the backlog.
+- **Route**: the path to the destination, revealed by resolving waypoints one at a time.
 - **Log**: the running record of resolved waypoints on a map.
-- **Features**: the map's grouping of its own Log entries into one or more independently shippable specs, filled in once the map clears.
-- **Uncharted water**: work that's in scope but not yet sharp enough to turn into a waypoint.
-- **Seam**, **interface**, **depth**, **leverage**, **locality**: `compass-design`'s vocabulary for module shape. Used consistently across `compass-spec`, `compass-task`, `compass-survey`, and `compass-test` rather than substituted with "component" or "boundary."
+- **Features**: the map's grouping of its Log entries into one or more independently shippable specs, filled in once the map clears.
+- **Uncharted water**: the map section for work in scope but not yet sharp enough to turn into a waypoint — suspected questions toward the destination.
+- **Out of scope (Beyond the chart)**: work beyond the destination; ruled out consciously; never graduates.

@@ -10,7 +10,7 @@ The user has come to you with an idea. It is unrefined and vague. There are stil
 ## Consumes / produces / hands off
 
 - **Consumes:** a loose, oversized idea, a whole feature area, a migration, a strategic choice, too uncharted to spec directly.
-- **Produces:** a map (destination, log, features, uncharted water, out-of-scope) and a set of resolved waypoints, each resolved via `compass-navigate`, `compass-prototype`, or direct investigation.
+- **Produces:** a map (destination, log, features, uncharted water, out of scope (Beyond the chart)) and a set of resolved waypoints, each resolved via `compass-navigate`, `compass-prototype`, or direct investigation.
 - **Called from:** used directly whenever an idea is too large or too uncharted for `compass-navigate` alone.
 - **Hands off to:** `compass-spec`, once per feature identified when the map clears (see [Splitting into features](#splitting-into-features)). One feature covering the whole map is a normal outcome, not a fallback; splitting only happens when the resolved map genuinely reads as more than one.
 
@@ -67,13 +67,13 @@ The whole map at low resolution, loaded once per session. Open waypoints are **n
 
 - **<feature name>**: <one-line gist of what it covers>. Waypoints: [<waypoint title>](link), [<waypoint title>](link)
 
-## Not yet specified
+## Uncharted water
 
 <!-- see "Uncharted water": in-scope territory you can't waypoint yet; graduates as the horizon advances -->
 
-## Out of scope
+## Out of scope (Beyond the chart)
 
-<!-- see "Out of scope": work ruled beyond the destination; closed, never graduates -->
+<!-- see "Out of scope (Beyond the chart)": work ruled beyond the destination; closed, never graduates -->
 ```
 
 ### Waypoints
@@ -107,26 +107,26 @@ Every waypoint is either **live** (worked *with* a person who speaks for themsel
 
 The map is *deliberately* incomplete: do not chart what cannot yet be seen. Beyond the known waypoints lies **uncharted water**: the dim view of decisions and investigations that are clearly coming but cannot yet be pinned down, because they hang on questions still open. Resolving a waypoint charts the water ahead of it, graduating whatever is now specifiable into fresh waypoints, one at a time, until the way to the destination is clear and no waypoints remain.
 
-The map's **Not yet specified** section is where that dim view is written down: the suspected question, the area to revisit later. It is the undiscovered horizon *toward* the destination: everything here is in scope, just not sharp enough to waypoint yet. Write as loosely or as fully as the view allows; it doubles as a signpost for collaborators reading where the effort is headed.
+The **Uncharted water** section is where that dim view is written down: the suspected question, the area to revisit later. It is the undiscovered horizon *toward* the destination: everything here is in scope, just not sharp enough to waypoint yet. Write as loosely or as fully as the view allows; it doubles as a signpost for collaborators reading where the effort is headed.
 
 **Uncharted or waypoint?** The test is whether the question can be stated precisely now, *not* whether it can be answered now.
 
 - **Waypoint when** the question is already sharp, even if it is blocked and cannot be acted on yet.
-- **Not yet specified when** it cannot yet be phrased that sharply. Do not pre-slice uncharted water into waypoint-sized pieces: it is coarser than a waypoint, and one patch may graduate into several waypoints, or none, once the horizon reaches it.
+- **Uncharted water when** it cannot yet be phrased that sharply. Do not pre-slice uncharted water into waypoint-sized pieces: it is coarser than a waypoint, and one patch may graduate into several waypoints, or none, once the horizon reaches it.
 
-**Not yet specified** excludes what is already decided (the Log), what is already a live waypoint, and what is out of scope (the next section).
+**Uncharted water** excludes what is already decided (the Log), what is already a live waypoint, and what is out of scope (the next section).
 
-## Out of scope
+## Out of scope (Beyond the chart)
 
-Uncharted water only ever gathers *toward* the destination. The destination fixes the scope, so work beyond it is **out of scope**: it is not uncharted water, and it does not belong in **Not yet specified**. It gets its own **Out of scope** section on the map: work consciously ruled out of *this* effort. Scope, not sharpness, lands it here.
+Uncharted water only ever gathers *toward* the destination. The destination fixes the scope, so work beyond it is **out of scope (Beyond the chart)**: it is not uncharted water, and it does not belong in **Uncharted water**. It gets its own **Out of scope (Beyond the chart)** section on the map: work consciously ruled out of *this* effort. Scope, not sharpness, lands it here.
 
 Out-of-scope work never graduates (the horizon stops at the destination), so it returns only if the destination is redrawn, and then as a fresh effort, not a resumption.
 
-Ruling something out of scope is a scoping act, not a step on the route. When a waypoint that already exists turns out to sit past the destination (mis-scoped in while charting, or exposed by a resolution), **close it** (a closed waypoint is unambiguously off the horizon) and leave one line in the **Out of scope** section: the gist plus why it is out of scope, linking the closed waypoint. It stays out of the **Log**, which records the route actually walked; a scope boundary is not a step on it.
+Ruling something out of scope is a scoping act, not a step on the route. When a waypoint that already exists turns out to sit past the destination (mis-scoped in while charting, or exposed by a resolution), **close it** (a closed waypoint is unambiguously off the horizon) and leave one line in the **Out of scope (Beyond the chart)** section: the gist plus why it is out of scope, linking the closed waypoint. It stays out of the **Log**, which records the route actually walked; a scope boundary is not a step on it.
 
 ## Splitting into features
 
-The map clears when both the horizon and **Not yet specified** are empty: nothing left unblocked, nothing left too fuzzy to waypoint. Before handing off to `compass-spec`, decide how many features the resolved map actually contains.
+The map clears when both the horizon and **Uncharted water** are empty: nothing left unblocked, nothing left too fuzzy to waypoint. Before handing off to `compass-spec`, decide how many features the resolved map actually contains.
 
 **One epic can produce one feature.** If the resolved waypoints read as a single coherent effort, one `compass-spec` call covering the whole map is correct, and nothing further is needed. Splitting is for when it doesn't: a whole feature area or migration big enough to need a map is also often big enough to contain several independently shippable pieces, and cramming them into one spec produces a document nobody can review and a task list with no feature-level grouping underneath the Epic.
 
@@ -156,8 +156,8 @@ Invoked with a loose idea.
 
 1. **Name the destination.** Use `compass-navigate` (and `compass-glossary` if terms need pinning down) to settle what this map is finding its way to: the spec, decision, or change. The destination fixes the scope, so it is settled first.
 2. **Map the horizon.** Interview again, **breadth-first** this time: fan out across the whole space rather than deep on any one thread, surfacing the open decisions and the first steps takeable now. **If this surfaces no uncharted water** (the way to the destination is already clear, the whole journey small enough for one session), a map is not needed. Stop and ask how to proceed instead.
-3. **Create the map** (labelled `compass:map`): Destination and Notes filled in, Log empty, the uncharted water sketched into **Not yet specified**.
-4. **Create the waypoints that can be specified now** as children of the map, then wire blocking edges in a **second pass** (items need ids before they can reference each other). Wiring sorts them into the horizon and the blocked; everything not yet specifiable stays uncharted: the **Not yet specified** section.
+3. **Create the map** (labelled `compass:map`): Destination and Notes filled in, Log empty, the uncharted water sketched into **Uncharted water**.
+4. **Create the waypoints that can be specified now** as children of the map, then wire blocking edges in a **second pass** (items need ids before they can reference each other). Wiring sorts them into the horizon and the blocked; everything not yet specifiable stays uncharted: the **Uncharted water** section.
 5. **Fire the investigate sub-agents.** For each `investigate` waypoint just created, dispatch a sub-agent to resolve it in parallel, capturing its findings with a pointer from the waypoint back to where they were written.
 6. Stop: charting is one session's work; it hand-resolves nothing.
 
@@ -169,7 +169,7 @@ Invoked with a map (a link or id). A waypoint is **optional**: without one, the 
 2. Choose the waypoint. If one was named, use it. Otherwise take the first horizon waypoint in order. **Claim it**: assign it before any work.
 3. Resolve it. **Zoom as needed**: fetch the full body of any related or closed waypoint on demand; use whichever skills the `## Notes` block names. If in doubt, use `compass-navigate` and `compass-glossary`.
 4. Record the resolution: post the answer as a **resolution comment** (or write it into the waypoint file), **close** the waypoint, and **append a pointer** to the map's Log.
-5. Add newly-surfaced waypoints (create, then wire); graduate any uncharted water the answer has made specifiable, clearing each graduated patch from **Not yet specified** so it lives only as its new waypoint. If the answer reveals that a waypoint (this one or another) sits beyond the destination, **rule it out of scope** rather than resolving it on the route. If the decision invalidates other parts of the map, update or delete those waypoints.
-6. If this resolution clears the map (the horizon and **Not yet specified** are now both empty), stop and split it into features before handing off. See [Splitting into features](#splitting-into-features).
+5. Add newly-surfaced waypoints (create, then wire); graduate any uncharted water the answer has made specifiable, clearing each graduated patch from **Uncharted water** so it lives only as its new waypoint. If the answer reveals that a waypoint (this one or another) sits beyond the destination, **rule it out of scope (Beyond the chart)** rather than resolving it on the route. If the decision invalidates other parts of the map, update or delete those waypoints.
+6. If this resolution clears the map (the horizon and **Uncharted water** are now both empty), stop and split it into features before handing off. See [Splitting into features](#splitting-into-features).
 
 Waypoints without a blocking relationship between them may be worked in parallel, so expect other sessions to be editing the map concurrently.
