@@ -108,3 +108,14 @@ If during implementation the work turns out to be larger than the size gate (new
 ## Notes
 
 This skill does not publish a formal spec artifact. The short spec lives in the conversation and the task record. If the project requires a durable spec for every change, use the full pipeline instead. This skill is for changes small enough that the conversation + commit message + task record are sufficient traceability.
+
+## Next step
+
+**After the quick change is committed and the task closed:**
+
+| Situation | Next action | Invocation |
+|-----------|-------------|------------|
+| More small tasks in the same Epic/Feature | `compass-horizon` | Continue in **this session** — invoke `compass-horizon` to claim the next task. It will re-evaluate the size gate. |
+| No more unblocked tasks in context | — | **End of session** — start a **fresh session** when new work arrives. |
+| Change grew beyond size gate during implementation | `compass-navigate` | **Fresh session** — hand off to `compass-navigate --quick` with the short spec, diff, and decisions gathered. The full pipeline resumes from there. |
+| Review Blocked after one re-review | `compass-implement` | **Fresh session** — escalate to full `compass-implement` pipeline (which loops until Clear). |

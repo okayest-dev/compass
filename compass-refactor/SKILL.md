@@ -113,3 +113,15 @@ If during execution the work turns out to be larger than the task scope (new fil
 - This skill assumes the refactor is **behavior-preserving at the seam**. It does not handle "refactors" that change observable behavior — those are implementation tasks, not refactors.
 - The characterization tests are the safety net. If the seam has no tests and cannot be tested, do not refactor; hand back to `compass-navigate` to decide on a testable seam or a different approach.
 - All commits go through `compass-git atomic-commit` for consistent messages and ordering.
+
+## Next step
+
+**After the refactor is complete (Clear verdict, task closed):**
+
+| Situation | Next action | Invocation |
+|-----------|-------------|------------|
+| More refactor tasks in the same Epic/Feature (each with its own navigate decision) | `compass-horizon` | Continue in **this session** — invoke `compass-horizon` to claim the next refactor task. |
+| Refactor complete, implementation tasks remain in the same Feature | `compass-horizon` | Continue in **this session** — invoke `compass-horizon` to claim the next implementation task (will route to `compass-implement`). |
+| All tasks in the Feature done | `compass-review` (optional, final) | **Fresh session recommended** — run a final `compass-review` against the full Feature diff for a holistic audit before merging. |
+| No more unblocked tasks in context | — | **End of session** — start a **fresh session** when new work arrives. |
+| Refactor grew beyond task scope (new files beyond seam, new contract) | `compass-navigate` | **Fresh session** — hand off to `compass-navigate` with the decision, diff, and characterization tests gathered. The full pipeline re-scopes from there. |

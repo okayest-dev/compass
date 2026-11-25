@@ -33,3 +33,16 @@ Once the slice (or the whole task) is built, run `compass-review` against the wo
 3. **A blocking finding survives three rounds, or the fix would change what the spec asked for rather than how it's built.** Stop looping. Take it to whoever owns the task, following `compass-review`'s "Accepting a blocking finding": either they accept it as a recorded exception, or the task goes back to `compass-navigate` (if the spec itself needs to change) or `compass-task` (if the work needs re-scoping). Never accept a blocking finding yourself, and never keep re-running the same fix past three rounds hoping it lands differently.
 
 Only step 1, or step 3 ending in a recorded exception, counts as done. A Blocked verdict with unresolved findings and no recorded exception is not a stopping point, no matter how much of the task is otherwise built.
+
+## Next step
+
+**After the task is complete (Clear verdict):**
+
+| Situation | Next action | Invocation |
+|-----------|-------------|------------|
+| Task closed, more tasks in the same Epic/Feature | `compass-horizon` | Continue in **this session** — invoke `compass-horizon` to claim the next unblocked task. |
+| Task closed, no more unblocked tasks in context | — | **End of session** — work for this Epic/Feature is done. Start a **fresh session** when ready for the next Epic/Feature or when blockers clear. |
+| All tasks in the Feature done | `compass-review` (optional, final) | **Fresh session recommended** — run a final `compass-review` against the full Feature diff (merge-base to HEAD) for a holistic Standards/Spec/Security audit before merging. |
+| Blocked finding survived 3 rounds or requires spec change | `compass-navigate` / `compass-task` | **Fresh session** — take it to the task owner per `compass-review`'s exception process. If they direct a spec change, invoke `compass-navigate`; if re-scoping, invoke `compass-task`. |
+
+**If the task was a refactor** (detected by `compass-implement`): it delegates to `compass-refactor` internally. The next-step logic above applies after `compass-refactor` returns.

@@ -97,3 +97,16 @@ Not every decision needs a paper trail. Use `compass-glossary` alongside this sk
 - a decision, from either an open-ended interview or a spec sanity check, is hard to reverse, surprising without context, and the result of a real trade-off (see `compass-glossary`'s recording criteria).
 
 For a quick, disposable interview where nothing needs to persist, thinking out loud about a small choice, skip `compass-glossary` entirely. Whether to record is a judgment call each round, not an upfront mode switch.
+
+## Next step
+
+**When the horizon is empty and the spec is registered as a Feature:**
+
+| Situation | Next skill | Invocation |
+|-----------|------------|------------|
+| Fresh spec from this interview | `compass-spec` | Continue in **this session** — invoke `compass-spec` to synthesize the spec from the resolved decisions. |
+| Spec provided from outside, now sane and registered | `compass-task` | Continue in **this session** — invoke `compass-task` to break the spec into vertical-slice tasks. |
+| Large/vague effort mapped via `compass-map` | `compass-spec` | Continue in **this session** — invoke `compass-spec` once per Feature the cleared map splits into. |
+| Decision only (no spec) | — | **End of session** — decision recorded in `compass-glossary`; no further skill unless a new question arises. |
+
+**If the interview was paused for `compass-prototype` or `compass-investigate`:** resume `compass-navigate` in **this session** with the result in hand.

@@ -173,3 +173,16 @@ Invoked with a map (a link or id). A waypoint is **optional**: without one, the 
 6. If this resolution clears the map (the horizon and **Uncharted water** are now both empty), stop and split it into features before handing off. See [Splitting into features](#splitting-into-features).
 
 Waypoints without a blocking relationship between them may be worked in parallel, so expect other sessions to be editing the map concurrently.
+
+## Next step
+
+**After the map clears and is split into features:**
+
+| Situation | Next skill | Invocation |
+|-----------|------------|------------|
+| One Feature covers the whole map (normal outcome) | `compass-spec` | Continue in **this session** — invoke `compass-spec` once to synthesize the spec from the map's Log. Then `compass-navigate` (sanity-check) → `compass-task` → `compass-horizon` in subsequent sessions. |
+| Multiple Features (genuinely independently shippable) | `compass-spec` (once per Feature) | **Fresh session per Feature** — invoke `compass-spec` for each Feature. Each produces its own Feature-type issue, then follows the standard pipeline (`compass-navigate` sanity-check → `compass-task` → `compass-horizon`). |
+| Map cleared but only a Decision was the destination | — | **End of session** — decision recorded in `compass-glossary` via `compass-navigate`. No spec, no tasks. The map's Log is the durable trace. |
+| Map work paused (horizon not empty, Uncharted water remains) | `compass-map` | **Fresh session** — re-invoke `compass-map` with the map link to work the next waypoint. Never resolve more than one waypoint per session. |
+
+**If `compass-navigate` was used to chart the destination:** the map's Notes block should name `compass-navigate` as a skill every session should consult, so subsequent sessions know to use it for waypoint resolution.

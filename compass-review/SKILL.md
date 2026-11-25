@@ -178,3 +178,16 @@ A change can pass some axes and fail others, because each one checks something s
 - Code that follows every standard and matches the spec exactly, but builds a query by string-concatenating a caller-supplied value → **Standards pass, Spec pass, Security fail.** Neither style conformance nor requirement conformance says anything about exploitability; only the Security axis is looking for it.
 
 Reporting them separately stops any one axis from masking the other two.
+
+## Next step
+
+**After the review verdict is reported:**
+
+| Verdict | Situation | Next action | Invocation |
+|---------|-----------|-------------|------------|
+| **Clear** | Called from `compass-implement` / `compass-quick-implement` / `compass-refactor` | Return to calling skill — it will commit, close the task, and decide the next step (see those skills' Next step sections). | — |
+| **Clear** | Run standalone (e.g., PR review, pre-merge audit) | **End of session** — diff is clean. If pre-merge, proceed to merge. If PR review, approve. | — |
+| **Blocked** | Called from `compass-implement` / `compass-refactor` | Return to calling skill — it will fix blocking findings and re-invoke `compass-review` (loops until Clear). | **Same session** — calling skill handles the fix/re-review loop. |
+| **Blocked** | Called from `compass-quick-implement` | Return to `compass-quick-implement` — it fixes once, re-reviews once; if still Blocked, it escalates to `compass-implement`. | **Same session** for first fix; **fresh session** for `compass-implement` escalation. |
+| **Blocked** | Run standalone | **Fresh session** — take blocking findings to the task owner per "Accepting a blocking finding." If they direct a fix, re-run `compass-review` in a fresh session. If they accept as exception, record and proceed. |
+| **Blocked (3 rounds or spec change needed)** | Any | **Fresh session** — invoke `compass-navigate` (spec change) or `compass-task` (re-scoping) per `compass-review`'s exception process. | **Fresh session** with owner involvement. |

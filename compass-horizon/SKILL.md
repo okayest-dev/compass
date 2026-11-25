@@ -55,3 +55,16 @@ Read the task's full body if the summary needs more detail. Then report one tigh
 Done when: an agent could start the task from the summary alone.
 
 When the horizon is empty, say so plainly and stop. Never invent a task.
+
+## Next step
+
+**After a task is claimed and reported:**
+
+| Task type | Next skill | Invocation |
+|-----------|------------|------------|
+| Standard implementation task (vertical slice, no navigate decision) | `compass-implement` | Continue in **this session** — invoke `compass-implement` to build the task. |
+| Small task (passes size gate: one behaviour, ≤5 files, no new contract/dependency) | `compass-quick-implement` | Continue in **this session** — invoke `compass-quick-implement` for the fast path. |
+| Refactor task (references a `compass-navigate` decision D-<NNN>) | `compass-refactor` | Continue in **this session** — invoke `compass-refactor` (via `compass-implement` or directly). |
+| Task reads as unclear/under-specified | `compass-navigate` | **Before implementing** — invoke `compass-navigate` in **this session** to sharpen the task's decisions. Then re-claim and continue. |
+
+**If the horizon is empty:** **End of session** — no work available. Start a fresh session when new tasks are published or blockers clear.

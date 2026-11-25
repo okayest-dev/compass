@@ -123,3 +123,16 @@ The end-to-end behaviour this task makes work, from the user's perspective, not 
 </issue-template>
 
 In either form, avoid specific file paths or code snippets: they go stale fast. Exception: if `compass-prototype` produced a snippet that encodes a decision more precisely than prose can (a state machine, a schema, a shape of data), inline it and note briefly that it came from a prototype. Trim it to the decision-rich parts, not a working demo, just the important bits.
+
+## Next step
+
+**After tasks are published and approved:**
+
+| Situation | Next skill | Invocation |
+|-----------|------------|------------|
+| Tasks published, at least one unblocked | `compass-horizon` | Continue in **this session** — invoke `compass-horizon` to fetch and claim the next unblocked task. It will hand off to the appropriate implement skill. |
+| Tasks published but all blocked | — | **End of session** — wait for blocking tasks to complete. Re-invoke `compass-horizon` in a **fresh session** when ready. |
+| Single task already chosen and claimed by user | `compass-implement` / `compass-quick-implement` / `compass-refactor` | Continue in **this session** — invoke the appropriate implement skill directly. `compass-horizon` is not needed. |
+| Refactor task (references a `compass-navigate` decision D-<NNN>) | `compass-refactor` | Continue in **this session** — invoke `compass-refactor` (called via `compass-implement` or directly). |
+
+**If tasks were published to a local `tasks/` directory (no tracker):** the user or a fresh session must run `compass-horizon` to pick up the next task. The local files serve as the backlog.

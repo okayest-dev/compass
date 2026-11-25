@@ -138,3 +138,15 @@ A description of what is out of scope for this spec.
 Any further notes about the feature.
 
 </spec-template>
+
+## Next step
+
+**After the spec is published as a Feature:**
+
+| Situation | Next skill | Invocation |
+|-----------|------------|------------|
+| Spec just authored in this conversation | `compass-navigate` (sanity-check) | Continue in **this session** — invoke `compass-navigate` to sanity-check the spec and confirm Feature registration. This pass is typically fast since decisions were already interrogated. |
+| Spec from a cleared `compass-map` (one per Feature) | `compass-navigate` (sanity-check) | Continue in **this session** — invoke `compass-navigate` for each Feature's spec. |
+| Spec handed in from outside (not via this skill) | `compass-navigate` (sanity-check + registration) | Continue in **this session** — invoke `compass-navigate`; it will sanity-check and register if needed. |
+
+**Do not** invoke `compass-task` directly. Every spec must pass through `compass-navigate`'s sanity-check gate first. That skill will hand off to `compass-task` once the spec is confirmed sane and registered.
