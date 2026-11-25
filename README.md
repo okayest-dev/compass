@@ -36,10 +36,16 @@ From a spec to done, every spec passes through the same gate regardless of which
 
 ```
 compass-spec ──▶ compass-navigate (sanity-check, register as Feature) ──▶ compass-task ──▶ compass-horizon ──▶ compass-implement ──▶ compass-review
-                                                                                                                          ▲                     │
-                                                                                                                          └─────── Blocked ──────┘
-                                                                                                                          (loops until Clear, or an owner-accepted exception is recorded)
+                                                                               │                              ▲                     │
+                                                                               ├─▶ compass-quick-implement ──┤                     │
+                                                                               └─▶ compass-refactor ────────┘                     │
+                                                                                                                           Blocked │
+                                                                                                                           (loops until Clear, or an owner-accepted exception is recorded)
 ```
+
+`compass-git` is called from `compass-implement`, `compass-quick-implement`, and `compass-refactor` before commit (atomic commits), and on demand for stacked rebase, conflict resolution, bisect, etc.
+
+`compass-survey` feeds candidates to `compass-navigate` → `compass-task` → `compass-refactor` for deepening work.
 
 | Skill | Role |
 |---|---|
@@ -49,6 +55,8 @@ compass-spec ──▶ compass-navigate (sanity-check, register as Feature) ─�
 | `compass-task` | Breaks a spec, a plan, or the current conversation into vertical-slice Tasks with explicit blocking edges. |
 | `compass-horizon` | Picks the next unblocked, unclaimed Task off the backlog and claims it. Prefers the current Epic or Feature when one is in context. |
 | `compass-implement` | Builds one Task: drives `compass-test`, commits, hands off for review. |
+| `compass-quick-implement` | Fast path for small changes (one behaviour, few files, no new contract): short spec in conversation, test-first implementation, single review pass, one commit, done. |
+| `compass-refactor` | Behavior-preserving refactor per a navigate decision: characterization tests at seam, incremental verified steps, atomic commits, review gate. |
 | `compass-review` | Three-axis review of a diff: does it follow this project's standards, does it match the spec it claims to implement, and does it introduce or fail to mitigate a security weakness. Ends in a Clear or Blocked verdict that gates `compass-implement`, not just an advisory report. |
 
 Cross-cutting skills, called from wherever they're needed rather than as fixed pipeline steps:
@@ -62,6 +70,7 @@ Cross-cutting skills, called from wherever they're needed rather than as fixed p
 | `compass-test` | The red/green loop and its anti-patterns. Called by `compass-implement` per vertical slice. |
 | `compass-prototype` | Throwaway code to answer a question that's cheaper to check by running than by reasoning about. |
 | `compass-research` | Reads and understands a codebase, committing durable facts to whatever memory store the project uses. |
+| `compass-git` | Generic git workflow skills: atomic commit splitting, stacked PR rebase, bisect regression, conflict resolution, safe history rewrite, undo recovery, branch cleanup. Tracker-agnostic. |
 
 ## Issue types
 

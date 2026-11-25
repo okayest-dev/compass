@@ -49,6 +49,20 @@ On top of whatever the project documents, the Standards axis always carries the 
 - **Always a judgement call.** Each smell is a labelled heuristic ("possible Feature Envy"), never a hard violation. Like any standard here, skip anything tooling already enforces.
 - **Blocking rule.** A documented-standard breach is **Hard** and blocks the verdict. A baseline smell is a **Judgement call** and is advisory only: it is reported, but does not by itself block.
 
+The Standards axis also enforces two mandatory hygiene passes on the diff. Each is a **Hard** finding if violated:
+
+**Test pruning pass** (see `compass-test`): every test in the diff must verify observable behaviour at the agreed seam. Flag any test that is
+- redundant (same behaviour tested at multiple levels),
+- tautological (tests the test, not the behaviour),
+- trivial (tests a getter, a constructor, a constant),
+- coupled to implementation details (tests private methods, internal structure).
+
+**Comment cleanup pass**: every comment in the diff must explain a non-obvious *why* (a constraint, a trade-off, a workaround) in one line. Flag any comment that
+- narrates the code ("this function does X"),
+- is commented-out code,
+- is a change history or TODO that belongs in the tracker,
+- states the obvious.
+
 Each smell reads *what it is* → *how to fix*; match it against the diff:
 
 - **Mysterious Name**: a function, variable, or type whose name does not reveal what it does or holds. → rename it; if no honest name comes, the design is murky.
@@ -92,6 +106,14 @@ Each category reads *what it is* → *what to check*; match it against the diff:
 - **Security misconfiguration**: a permissive or debug default (wildcard CORS with credentials, verbose error pages, disabled certificate verification) left reachable outside a development environment. → flag the setting, check whether it is gated by environment.
 - **Vulnerable or outdated dependency introduced by this diff**: a new dependency or version bump added with no check for known vulnerabilities in it. → flag the change; note it needs a dependency-audit pass if the project has one, otherwise say so explicitly rather than silently skipping it.
 - **Missing audit trail for a sensitive operation**: an action that changes access, deletes data, or moves money or credentials with nothing recording who did it and when. → flag the operation, check for a log or event naming the actor.
+
+**Failing-input generation**: for each trust boundary named in the spec's Security Decisions (or the obvious boundary if no spec), the Security sub-agent must generate at least one concrete failing input that would exploit a matched weakness. For example:
+- Injection: a payload that would execute if concatenated unsafely.
+- Broken access control: a request that should be denied but the diff shows no check.
+- SSRF: a URL that would reach an internal endpoint if unrestricted.
+- IDOR: an identifier the caller should not access but the diff shows no ownership check.
+
+Report the failing input alongside the finding. This turns "possible weakness" into "demonstrable exploit" and makes the severity rating concrete.
 
 ### 5. Spawn all three sub-agents in parallel
 

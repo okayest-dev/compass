@@ -32,6 +32,17 @@ Q2 - <question title>: <question body, may be multiple paragraphs, including mul
 Recommended: <recommended answer>
 ```
 
+### Interactive questioning (agent-native UI)
+
+When running in an agent that supports native interactive questioning (Claude Code's `AskUserQuestion`, OpenCode's `question` tool, Google Antigravity's `ask_question`), use the native UI instead of markdown tables for horizon rounds. This improves UX without changing the horizon/rounds mechanic.
+
+Detection:
+- Check the agent's available tools for an interactive question tool.
+- If present, use it for each horizon round: present each question with its recommended answer as a structured prompt, collect the response, then recompute the horizon.
+- If not present, fall back to the markdown format above.
+
+The interview mechanics (rounds, horizon, recommending answers, waiting for decisions) remain identical regardless of UI.
+
 Each round's answers reshape the tree. Settled decisions push the horizon outward and unblock questions that depended on them. Recompute the horizon and ask the next round. A question whose answer depends on another question still open this round belongs to a *later* round, not this one.
 
 Finding **facts** is always this skill's job, never the other party's. When a horizon question needs a fact from the environment (files, tools, existing code, prior records), dispatch to `compass-investigate` for targeted fact-finding. Do not ask for anything that can be looked up directly. Do not block on it either: a running investigation is an unsettled prerequisite, so only the questions downstream of it wait. Ask the rest of the horizon now. The **decisions** themselves belong to the person being interviewed. Put each to them and wait.

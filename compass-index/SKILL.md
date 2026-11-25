@@ -17,9 +17,11 @@ Discoverable reference for the Compass skill set. No execution, no routing — j
 | `compass-navigate` | Idea/decision/plan OR existing spec | Resolved decisions (via `compass-glossary`) OR confirmed Feature | `compass-spec` / `compass-task` / `compass-glossary` / `compass-prototype` / `compass-investigate` |
 | `compass-spec` | Resolved decisions (from navigate or cleared map) | Spec published as Feature | `compass-navigate` (sanity-check) |
 | `compass-task` | Spec (cleared by navigate) OR plan/conversation | Task-type issues with blocking edges | `compass-horizon` |
-| `compass-horizon` | Task backlog | One claimed Task | `compass-implement` |
+| `compass-horizon` | Task backlog | One claimed Task | `compass-implement` / `compass-quick-implement` |
 | `compass-implement` | Task (claimed) | Working, tested code committed | `compass-review` |
-| `compass-review` | Diff + originating spec | Three-axis findings report (Standards + Spec + Security) | Back to `compass-implement` for fixes |
+| `compass-quick-implement` | Small claimed Task (size gate passed) | Short spec in conversation + working tested code committed | `compass-review` (single pass) |
+| `compass-refactor` | Refactor task (claimed, with navigate decision) | Behavior-preserving code at seam + characterization tests | `compass-review` |
+| `compass-review` | Diff + originating spec | Three-axis findings report (Standards + Spec + Security) | Back to `compass-implement` / `compass-quick-implement` / `compass-refactor` for fixes |
 
 ### Cross-cutting skills (called from anywhere)
 
@@ -32,6 +34,7 @@ Discoverable reference for the Compass skill set. No execution, no routing — j
 | `compass-prototype` | Open question better answered by running code | Throwaway artifact + captured answer + trimmed snippet for spec | Calling skill resumes with answer |
 | `compass-research` | Codebase scope | Facts committed to persistent memory | Nothing (informs design/debug) |
 | `compass-investigate` | Investigation requirement (bug, code question, prior art, clarification, dependency map) | Investigation record with findings, confidence, recommended next skill | `compass-navigate` / `compass-map` / `compass-task` / `compass-glossary` / terminal |
+| `compass-git` | Git repo with WIP (uncommitted, stacked, conflicts, lost commits, regression) | Clean history (atomic commits, rebased stacks, resolved conflicts, recovered work, identified regression) | Calling skill continues with clean history |
 
 ### Reference skills
 
@@ -63,10 +66,29 @@ flowchart TD
     
     %% Implementation path
     I -->|Tasks with blocking edges| J[compass-horizon]
-    J -->|Next unblocked task| K[compass-implement]
+    J -->|Large task| K[compass-implement]
+    J -->|Small task (size gate)| Q[compass-quick-implement]
+    J -->|Refactor task (navigate decision)| R[compass-refactor]
     K -->|Test-driven via compass-test| L[compass-review]
+    Q -->|Test-first, single review| L
+    R -->|Characterization tests, incremental| L
     L -->|Standards + Spec + Security findings| K
+    L -->|Standards + Spec + Security findings| Q
+    L -->|Standards + Spec + Security findings| R
     L -->|Clean| M[Done]
+    
+    %% Git hygiene (called from implement/quick-implement/refactor)
+    K -.->|before commit| S[compass-git atomic-commit]
+    Q -.->|before commit| S
+    R -.->|before each step commit| S
+    J -.->|stacked branches| T[compass-git stacked-rebase]
+    K -.->|conflicts| U[compass-git conflict-resolution]
+    K -.->|regression| V[compass-git bisect-regression]
+    
+    %% Survey -> Navigate -> Task -> Refactor
+    W[compass-survey] -.->|candidate| C
+    C -.->|decision D-NNN| I
+    I -.->|refactor task| R
     
     %% Cross-cutting (available everywhere)
     N[compass-glossary] -.->|vocabulary & decisions| C
@@ -75,27 +97,30 @@ flowchart TD
     N -.-> I
     N -.-> K
     N -.-> L
+    N -.-> Q
+    N -.-> R
     
     O[compass-design] -.->|vocabulary| I
     O -.-> K
     O -.-> L
     O -.-> B
+    O -.-> R
     
     P[compass-survey] -.->|candidates| C
     P -.-> D
     
-    Q[compass-prototype] -.->|design answers| C
-    Q -.-> D
-    Q -.-> O
+    Q2[compass-prototype] -.->|design answers| C
+    Q2 -.-> D
+    Q2 -.-> O
     
-    R[compass-research] -.->|codebase facts| C
-    R -.-> D
-    R -.-> O
+    R2[compass-research] -.->|codebase facts| C
+    R2 -.-> D
+    R2 -.-> O
     
-    S[compass-investigate] -.->|targeted facts| C
-    S -.-> D
-    S -.-> I
-    S -.-> N
+    S2[compass-investigate] -.->|targeted facts| C
+    S2 -.-> D
+    S2 -.-> I
+    S2 -.-> N
     
     style B fill:#e1f5fe
     style D fill:#e1f5fe
@@ -103,6 +128,8 @@ flowchart TD
     style I fill:#fff3e0
     style J fill:#e8f5e9
     style K fill:#e8f5e9
+    style Q fill:#e8f5e9
+    style R fill:#e8f5e9
     style L fill:#fce4ec
 ```
 
@@ -117,6 +144,9 @@ flowchart TD
 | "I want to refactor a shallow module" | `compass-survey` |
 | "I need to decide on a design" | `compass-navigate` (+ `compass-prototype` if needed) |
 | "I'm ready to implement" | `compass-horizon` (picks next task) |
+| "I have a small change (one behaviour, few files, no new contract)" | `compass-horizon` → `compass-quick-implement` |
+| "I have a refactor task with a navigate decision (deepening a module)" | `compass-horizon` → `compass-refactor` |
+| "My git history is messy / I have conflicts / I need to bisect" | `compass-git` (atomic-commit, conflict-resolution, stacked-rebase, bisect-regression) |
 | "What skill does X?" | `compass-index` (this skill) |
 
 ## Issue types reference

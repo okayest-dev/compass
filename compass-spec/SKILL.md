@@ -49,13 +49,15 @@ The solution to the problem, from the user's perspective.
 
 ## User Stories
 
-A long, numbered list of user stories. Each user story should be in the format:
+A long, numbered list of user stories. Each user story should in the format:
 
 1. As a `<actor>`, I want `<feature>`, so that `<benefit>`.
 
 Example:
 
 > As a mobile bank customer, I want to see the balance on my accounts, so that I can make better informed decisions about my spending.
+
+Each user story must carry a stable ID: `UC-<NN>` (e.g., `UC-01`, `UC-02`). Assign sequentially, never renumber. This ID is used by `compass-task` to trace tasks to stories and by `compass-review` to trace findings to requirements.
 
 This list should be extensive and cover all aspects of the feature.
 
@@ -70,6 +72,8 @@ A list of implementation decisions that were made. This can include:
 - Schema changes.
 - Interface contracts.
 - Specific interactions.
+
+Each decision must carry a stable ID: `D-<NNN>` (e.g., `D-001`, `D-002`). Assign sequentially, never renumber. This ID is used by `compass-glossary` to record hard-to-reverse decisions and by `compass-review` to trace findings to decisions.
 
 Do **not** include specific file paths or code snippets. They tend to go out of date quickly.
 
@@ -87,12 +91,43 @@ A list of testing decisions that were made. Include:
 
 The trust boundaries and data sensitivity identified in step 3, and how each is guarded. Include:
 
-- **Trust boundaries**: where new or wider input arrives from (a new endpoint, a new file format, a new caller), and what validates it before it is used.
-- **Data sensitivity**: any credential, secret, token, or personal data this feature stores, logs, or transmits, and how it is protected in each of those states.
-- **Authentication and authorisation**: who can invoke the feature, how that is enforced, and where the check lives.
-- **New external calls**: any outbound request to another system, especially one built from caller-supplied input, and what restricts its destination.
+- **Trust boundaries**: where new or wider input arrives from (a new endpoint, a new file format, a new caller), and what validates it before it is used. Each boundary carries a stable ID: `TB-<NN>`.
+- **Data sensitivity**: any credential, secret, token, or personal data this feature stores, logs, or transmits, and how it is protected in each of those states. Each sensitive datum carries a stable ID: `SD-<NN>`.
+- **Authentication and authorisation**: who can invoke the feature, how that is enforced, and where the check lives. Each authz change carries a stable ID: `AZ-<NN>`.
+- **New external calls**: any outbound request to another system, especially one built from caller-supplied input, and what restricts its destination. Each outbound call carries a stable ID: `OC-<NN>`.
 
 If step 3 found nothing (no new trust boundary, no new sensitive data, no authorisation change, no new outbound call), write that explicitly: "No new trust boundaries, sensitive data, or authorisation changes identified." An absent section and a considered "none" read identically to `compass-navigate` and `compass-review`; only the second one is correct.
+
+## Error Registry
+
+A unified error registry for this feature. Each error carries a stable ID: `ERR-<NNN>`. Include:
+- Error code and message.
+- HTTP status / CLI exit code / UI message as applicable.
+- User action to resolve.
+- Which trust boundary or invariant it protects (cross-reference `TB-` or `INV-` IDs).
+
+## Invariant Registry
+
+A list of domain invariants that must hold at runtime. Each invariant carries a stable ID: `INV-<NN>`. Include:
+- The invariant statement.
+- Where it is enforced (code location or seam).
+- What happens on violation (error code, compensation, alert).
+
+## State Machine Registry
+
+If the feature involves stateful behaviour, list each state machine. Each carries a stable ID: `SM-<NN>`. Include:
+- States and transitions.
+- Events that trigger transitions.
+- Guards and actions.
+- Idempotency keys where applicable.
+
+## Threat Model
+
+If the feature introduces new threats, list each. Each carries a stable ID: `THREAT-<NN>`. Include:
+- STRIDE category.
+- Asset affected.
+- Likelihood and impact.
+- Mitigation (cross-reference `TB-`, `SD-`, `AZ-`, `OC-`, `ERR-`, `INV-` IDs).
 
 ## Out of Scope
 
